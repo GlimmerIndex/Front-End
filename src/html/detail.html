@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情页</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/src/css/index.css">
+    <link rel="stylesheet" href="/src/css/detail.css">
+    <script src="https://unpkg.com/vue@2.7.0/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/src/js/index.js" defer></script>
+    <script src="/src/js/detail.js" defer></script>
+     
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div id="header">
+        <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+            text-color="#fff" active-text-color="#ffd04b" style="position: relative;">
+            <!-- 首页标签 -->
+            <el-menu-item index="1" id="index-tag">
+                <a href="index.html" id="index-target">
+                    <i class="el-icon-house" style="color: #409EFF;"></i><span>首页</span>
+                </a>
+            </el-menu-item>
+            <el-menu-item index="0" id="hello-tag" onload="get_hello()">
+                <span id="account-type-1" v-if="type==2">普通用户</span><span id="account-type-2" v-else>管理员</span><span id="account-name"> {{ uname }} 您好！</span>
+                <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
+            </el-menu-item>
+            <!-- 用户中心标签 -->
+            <el-menu-item index="1" style="position: absolute; right: 25px; padding:0px 0px 0px 10px;">
+                <el-dropdown>
+                    <span class="el-dropdown-link">
+                        <i class="el-icon-user-solid" style="color: #409EFF;"></i>用户中心<i class="el-icon-arrow-down"></i>
+                    </span>
+                    <!-- 下拉框，分别对应文档管理，账号登出等功能 -->
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item v-if="type==1">
+                            <i class="el-icon-document-add" style="color: #606266;"></i>
+                            <input type="button" class="idw" onclick="window.location.href = 'manage.html'" value="文档管理"
+                                id="input-button" />
+                        </el-dropdown-item>
+                        <el-dropdown-item>
+                            <i><img src="/svg/sign-out.svg" width="14px" height="14px"
+                                    style="position: relative; top: 1px;"></i>
+                            <input type="button" class="ch_user" onclick="ch_user()" value="账号登出" id="input-button" />
+                        </el-dropdown-item>
+                        <el-dropdown-item>
+                            <i class="el-icon-error" style="color: #606266;"></i>
+                            <input type="button" class="br_user" onclick="Break()" value="账号注销" id="input-button" />
+                        </el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </el-menu-item>
+        </el-menu>
+    </div>
+    <main style="padding-top: 0; padding-bottom: 1%;">
+        <div id="about">
+                <div id="pdftitle">{{ tableData.fileName }}</div>
+                <div id="information">
+                    上传时间：{{ time }}&nbsp;&nbsp;&nbsp;文档大小：{{ tableData.fileSize }}Kb<br>
+                    点赞量：{{ tableData.likeNumber }}&nbsp;&nbsp;&nbsp;点踩量：{{ tableData.dislikeNumber }}
+                </div>
+                <div id="fragment-block">
+                    <span id="fragment-title">相关段落</span>
+                    <button class="fragment" v-for="item in tableData.data" v-html="item.content" @click="jump_page(item.pageId)"></button>
+                </div>
+                <div id="interact">
+                    <el-button plain class="est" @click="like(false)">
+                        <img src="/svg/liked.svg" v-if="isLike" width="20px" height="20px">
+                        <img src="/svg/like.svg" v-else width="20px" height="20px">
+                    </el-button>
+                    <el-button plain class="est" @click="dislike(false)">
+                        <img src="/svg/disliked.svg" v-if="isDislike" width="20px" height="20px">
+                        <img src="/svg/dislike.svg" v-else width="20px" height="20px">
+                    </el-button>
+                    <el-button type="primary" icon="el-icon-download" @click="download()">下载文档</el-button>
+                </div>
+            </div>
+
+        </div>
+        <div id="pdf">
+            <iframe :src="'http://127.0.0.1:8081//pdfjs/web/viewer.html?file='+filePath+'&page='+pagenumber" width="100%" height="90%"></iframe>
+        </div>
+    </main>
+</body>
+</html>

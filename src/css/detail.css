@@ -1,0 +1,76 @@
+main{
+    column-count: 2;
+    column-gap: 1px;
+    column-rule: 1px rgb(216, 212, 212) solid;
+}
+
+#about{
+    position: relative;
+    text-align: center;
+    top: 1%;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+}
+
+#pdftitle{
+    font-size: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#information{
+    color: #4c7996;
+    padding-bottom: 30px;
+}
+
+#fragment-block{
+    width: 100%;
+    padding: 0 10px;
+    height: 70%;
+    margin-bottom: 3%;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+#fragment-title{
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    font-weight: 700;
+    color: #313131;
+}
+
+.fragment{
+    /* display: inline-block; */
+    text-align: left;
+    font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+    font-size: 16px;
+    color: #7b7b7b;
+    background-color: #ffffff00;
+    border-radius: 2px;
+    border: 0.5px solid #8a8b8d;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04); */
+    margin: 5px 0;
+    padding: 10px 5px;
+}
+
+.highlight_glimmer{
+    display: inline-block;
+    background-color: rgb(255, 43, 43);
+    color: #f5f5f5;
+    border-radius: 2px;
+    padding: 0 4px;
+}
+
+.est{
+    padding: 5px 5px;
+    transform: translateY(3.5px);
+}
+
+#pdf{
+    position: relative;
+    /* right: ; */
+    top: 3%;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+}
