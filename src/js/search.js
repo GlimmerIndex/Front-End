@@ -396,7 +396,7 @@ var Main = {
   },
   methods: {
     detail(a) {
-      window.location.href = "/src/html/detail.html?keyword=" + this.input + "&index" + this.tableData.indexOf(a);
+      window.location.href = "/src/html/detail.html?keyword=" + this.input + "&index=" + this.tableData.indexOf(a);
       // alert("scscsd");
       
     },

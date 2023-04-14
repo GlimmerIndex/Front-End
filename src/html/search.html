@@ -15,14 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/src/js/search.js" defer></script>
 </head>
-<style>
-    main{
-    background: url(../css/backg_se.png) no-repeat;
-    background-size:100% 22%;
-    /* background-attachment:fixed; */
-
-}
-</style>
 <body >
     <!-- 顶部导航栏 -->
     <div id="header">
@@ -67,19 +59,14 @@
     </div>
     <main>
         <div id="search">
-            <el-input :size="medium" v-model="input" placeholder="请输入搜索内容" style="
-                    position: relative;
-                    top: 50%;
-                    
-                    transform: translateY(-50%);">
+            <el-input :size="medium" v-model="input" placeholder="请输入搜索内容" style="margin: 100px auto;">
             </el-input>
             <el-button type="primary" icon="el-icon-search" @click="searcH()"
-                style=" position: relative; top: 50%; transform: translateY(-50%); ">搜索</el-button>
+                style=" position: relative;">搜索</el-button>
         </div>
+
         <div id="article">
-
             <template>
-
                 <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)"  style="width: 100%">
                     <el-table-column type="expand">
                         <template slot-scope="props">

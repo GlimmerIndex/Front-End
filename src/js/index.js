@@ -10,9 +10,9 @@ var Main = {
   },
   methods: {
     charge(){
-      // return true;
+      return false;
       var Token = localStorage.getItem("token");
-      return Token;
+      return !Token;
     },
   }
 }

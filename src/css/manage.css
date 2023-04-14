@@ -1,0 +1,35 @@
+#upload {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    top: 9%;
+    left: 48%;
+}
+
+#files {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    width: 70%;
+    top: 10%;
+    background-color: #fff;
+    margin: 0 auto;
+    position: relative;
+    left: 10%;
+}
+
+#app{
+    width: 300px;
+    position:absolute;
+    left: 5%;
+    top: 30%;
+}
+
+body{
+    
+    background: url(../img/backg_ma.jpg) no-repeat;
+    background-size:100% 40%;
+    /* background-attachment:fixed; */
+    margin: 0;
+    border: 0;
+    /* padding-bottom: 5%; */
+
+}
