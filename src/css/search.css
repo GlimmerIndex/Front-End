@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+    border: 0;
+}
 main{
     /* height: auto; */
     padding-bottom: 200px;

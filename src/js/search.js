@@ -396,12 +396,12 @@ var Main = {
   },
   methods: {
     detail(a) {
-      window.location.href = "../html/index.html?keyword=" + this.input + "&index" + this.tableData.indexOf(a);
+      window.location.href = "/src/html/detail.html?keyword=" + this.input + "&index" + this.tableData.indexOf(a);
       // alert("scscsd");
       
     },
     downLoad() {
-      alert("scscsd");
+      // alert("scscsd");
       var Token = localStorage.getItem("token");
       axios({
         method: "get",
@@ -420,7 +420,7 @@ var Main = {
         });
     },
     searcH() {
-      window.location.href = "../html/search.html?keyword=" + this.input;
+      window.location.href = "/src/html/search.html?keyword=" + this.input;
     },
     SearcH() {
       //获取url
@@ -459,7 +459,7 @@ var Main = {
         });
     },
     like(a) {
-      alert("wsad");
+      // alert("wsad");
       var Token = localStorage.getItem("token");
       axios({
         method: "post",
@@ -477,7 +477,7 @@ var Main = {
         });
     },
     dislike(a) {
-      alert("wsad");
+      // alert("wsad");
       var Token = localStorage.getItem("token");
       axios({
         method: "post",

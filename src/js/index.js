@@ -27,7 +27,7 @@ var Main = {
   },
   methods:{
     searcH() {
-      window.location.href = "../html/search.html?keyword=" + this.input;
+      window.location.href = "/src/html/search.html?keyword=" + this.input;
     },
   }
 };
