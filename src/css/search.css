@@ -29,3 +29,25 @@ main{
     position: relative;
     /* left: 12%; */
 }
+
+.demo-table-expand label {
+    /* width: 90px; */
+    font-size: 20px;
+    color: #99a9bf;
+  }
+  .demo-table-expand p {
+    color: black;
+    display: inline-block;
+    font-size: 17px;
+    text-indent: 2em;
+  }
+  .el-form-item {
+    padding: 10px;
+    margin: 0;
+    /* width: 50%; */
+  }
+  
+  .highlight_glimmer {
+    text-shadow: 0 0 2px rgb(255, 0, 0);
+    /* background-color: ; */
+  }
