@@ -1,6 +1,7 @@
 
 var host = "http://localhost:8080/"
 function IsLogin() {
+  return true;
   console.log(localStorage.getItem("token"));
   console.log(localStorage.getItem("token") !== null);
   if (localStorage.getItem("token") == null) {
@@ -239,7 +240,8 @@ var app = new Vue({
   data() {
     return {
       version: "v0.1.1",
-      loginstatus: false
+      loginstatus: false,
+      plat: false
     }
   },
   method: {
@@ -248,6 +250,9 @@ var app = new Vue({
     console.log("App created");
     console.log("前端版本" + this.version);
     this.loginstatus = IsLogin();
+    this.plat = navigator.userAgent.match( // 判断不同端
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    );
     console.log(this.loginstatus);
     if (this.loginstatus) {
       this.$notify({
