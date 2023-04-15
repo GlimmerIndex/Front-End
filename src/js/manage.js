@@ -1,8 +1,8 @@
 var host = "http://localhost:8080/"
 
 var Main = {
-  data(){
-    return{
+  data() {
+    return {
       isLogin: true,
       input_uname: "",
       input_password: "",
@@ -11,7 +11,7 @@ var Main = {
     }
   },
   methods: {
-    charge(){
+    charge() {
       // return false;
       var Token = localStorage.getItem("token");
       return !Token;
@@ -27,7 +27,7 @@ var Main = {
       input: "",
     };
   },
-  methods:{
+  methods: {
     searcH() {
       window.location.href = "/src/html/search.html?keyword=" + this.input;
     },
@@ -41,7 +41,7 @@ new Ctor().$mount("#search");
 function ch_user() {
   a = confirm("是否要退出并重新登录");
   if (a == true) {
-    localStorage.setItem("token", 0);
+    localStorage.setItem("token", null);
     window.location.href = "/index.html";
   } else {
     return;
@@ -65,12 +65,14 @@ var Main = {
       this.$message("click on item " + command);
     },
     get_hello() {
-      this.uname = localStorage.getItem("uname")
+      this.uname = localStorage.getItem("uname");
+      var Token = localStorage.getItem("token");
       axios({
         method: "get",
         url: host + "user/info/" + localStorage.getItem("uname"),
-        headers: { " taken": Token },
+        headers: { " token": Token },
       }).then(function (response) {
+        console.log(response);
         if (response.code == 200) {
           this.type = response.data.userType;
         } else {
@@ -80,6 +82,9 @@ var Main = {
       });
     }
   },
+  mounted: function () {
+    this.get_hello();
+  }
 };
 var Ctor = Vue.extend(Main);
 new Ctor().$mount("#header");
@@ -151,23 +156,23 @@ var Main = {
       else { return; }
     },
     handleChange(file, fileLists) {
-			// console.log(file);
-			// console.log(fileLists);
-			// 本地服务器路径
-			console.log(URL.createObjectURL(file.raw));
-			// 本地电脑路径
-			console.log(document.getElementsByClassName("el-upload__input")[0].value); 
-		},
-    handleSizeChange (size) {
-      console.log(size,'size');
-    this.pagesize = size;
-    console.log(this.pagesize); //每页下拉显示数据
-  },
-  handleCurrentChange (currentPage) {
-      console.log(currentPage,'currentPage');
-    this.currentPage = currentPage;
-    console.log(this.currentPage); //点击第几页
-  },
+      // console.log(file);
+      // console.log(fileLists);
+      // 本地服务器路径
+      console.log(URL.createObjectURL(file.raw));
+      // 本地电脑路径
+      console.log(document.getElementsByClassName("el-upload__input")[0].value);
+    },
+    handleSizeChange(size) {
+      console.log(size, 'size');
+      this.pagesize = size;
+      console.log(this.pagesize); //每页下拉显示数据
+    },
+    handleCurrentChange(currentPage) {
+      console.log(currentPage, 'currentPage');
+      this.currentPage = currentPage;
+      console.log(this.currentPage); //点击第几页
+    },
   }
 
 

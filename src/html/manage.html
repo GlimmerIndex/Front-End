@@ -13,7 +13,7 @@
     <script src="//unpkg.com/element-ui@2.15.13/lib/index.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/src/js/manage.js" defer></script>
+    <script src="../js/manage.js" defer></script>
     <script src="//unpkg.com/element-ui@2.15.13/lib/index.js"></script>
 </head>
 
@@ -29,8 +29,9 @@
                     <i class="el-icon-house" style="color: #409EFF;"></i><span>首页</span>
                 </a>
             </el-menu-item>
-            <el-menu-item index="0" id="hello-tag" onload="get_hello()">
-                <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2" v-else>管理员</span><span id="account-name"> {{ uname }} 您好！</span>
+            <el-menu-item index="0" id="hello-tag">
+                <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2" v-else>管理员</span><span
+                    id="account-name"> {{ uname }} 您好！</span>
                 <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
             </el-menu-item>
             <!-- 用户中心标签 -->
@@ -90,32 +91,20 @@
                 </el-table-column>
             </el-table>
             <div>
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-sizes="[10, 30, 90, 120]"
-                  :page-size="pagesize"
-                  layout="total, sizes, prev, pager, next, jumper"
-                  :total="tableData.length">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage" :page-sizes="[10, 30, 90, 120]" :page-size="pagesize"
+                    layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
                 </el-pagination>
-              </div>
+            </div>
         </template>
         <!-- 脚本：利用vue添加各文献的属性 -->
     </div>
     <div id="app">
-        <el-upload
-          class="upload-demo"
-          ref="upload"
-          action="http://localhost/8080/uploads/pdf/"
-          multiple
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          :file-list="fileList"
-          :auto-upload="false">
-          <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-          <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传pdf文件</div>
+        <el-upload class="upload-demo" ref="upload" action="http://localhost/8080/uploads/pdf/" multiple
+            :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" :auto-upload="false">
+            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+            <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传pdf文件</div>
         </el-upload>
     </div>
     <div id="login" v-if="charge()">

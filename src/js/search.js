@@ -1,8 +1,8 @@
 
 var host = "http://localhost:8080/"
 var Main = {
-  data(){
-    return{
+  data() {
+    return {
       isLogin: true,
       input_uname: "",
       input_password: "",
@@ -11,7 +11,7 @@ var Main = {
     }
   },
   methods: {
-    charge(){
+    charge() {
       // return false;
       var Token = localStorage.getItem("token");
       return !Token;
@@ -27,7 +27,7 @@ var Main = {
       input: "",
     };
   },
-  methods:{
+  methods: {
     searcH() {
       window.location.href = "/src/html/search.html?keyword=" + this.input;
     },
@@ -158,7 +158,7 @@ var Main = {
         });
     },
     searcH() {
-      window.location.href = "/src/html/search.html?keyword=" + this.input;
+      // window.location.href = "/src/html/search.html?keyword=" + this.input;
     },
     SearcH() {
       //获取url

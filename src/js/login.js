@@ -23,18 +23,19 @@ function login() {
     },
   })
     .then(function (response) {
-      if (response.code == 200) {
+      // console.log(response);
+      if (response.data.code == 200) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("uname", uname);
-        window.location.href = "../User/user.html";
+        console.log(uname);
+        window.location.href = "./index.html";
       } else {
-        alert(response.msg);
+        alert(response.data.msg);
       }
     })
     .catch(function (error) {
       console.log(error);
     });
-  // window.location.href='../User/user.html';
 }
 
 function isEmpty(str) {

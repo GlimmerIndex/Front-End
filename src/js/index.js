@@ -1,9 +1,30 @@
 var host = "http://localhost:8080/"
+// import { createApp } from 'vue'
 
-var Main = {
+var app = new Vue({
+  el: "#app",
   data() {
     return {
-      isLogin: true,
+      version: "v0.1.1",
+      isLogin: "false"
+    }
+  },
+  method: {
+    IsLogin() {
+      if (localStorage.getItem("token") == null) {
+        return isLogin = false;
+      }
+      return isLogin = true;
+    }
+  }
+})
+// app.mount("#app");
+
+
+var login = new Vue({
+  el: "#login",
+  data() {
+    return {
       input_uname: "",
       input_password: "",
       input_mail: "",
@@ -11,17 +32,16 @@ var Main = {
     }
   },
   methods: {
-    charge(){
+    charge() {
       // return false;
-      var Token = localStorage.getItem("token");
-      return !Token;
+      return this.isLogin = IsLogin();
     },
   }
-}
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#login");
+});
 
-var Main = {
+
+var search = new Vue({
+  el: "#search",
   data() {
     return {
       input: "",
@@ -32,9 +52,7 @@ var Main = {
       window.location.href = "./src/html/search.html?keyword=" + this.input;
     },
   }
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#search");
+});
 
 
 // 退出登录
@@ -43,18 +61,22 @@ function ch_user() {
   if (a == true) {
     localStorage.setItem("token", null);
     window.location.href = "/index.html";
+    localStorage.setItem("uname", null);
   } else {
     return;
   }
 }
+Vue.component('header', {
 
-var Main = {
+})
+var header = new Vue({
+  el: "#header",
   data() {
     return {
       activeIndex: "1",
       activeIndex2: "1",
       type: 1,
-      uname: 'null',
+      uname: 'null'
     };
   },
   methods: {
@@ -66,11 +88,14 @@ var Main = {
     },
     get_hello() {
       this.uname = localStorage.getItem("uname")
+      this.type = 2;
+      console.log(this);
       axios({
         method: "get",
         url: host + "user/info/" + localStorage.getItem("uname"),
-        headers: { " taken": Token },
+        headers: { " token": Token },
       }).then(function (response) {
+        console.log(response);
         if (response.code == 200) {
           this.type = response.data.userType;
         } else {
@@ -80,9 +105,10 @@ var Main = {
       });
     }
   },
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#header");
+  mounted: function () {
+    console.log("header created");
+  }
+});
 
 // 账户注销
 function Break() {
