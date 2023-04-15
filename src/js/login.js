@@ -6,11 +6,11 @@ function login() {
   var uname = $("#uname").val();
   if (isEmpty(uname)) {
     alert("账号输入不可为空");
-    return;
+    return false;
   }
   if (isEmpty(password)) {
     alert("密码输入不可为空");
-    return;
+    return false;
   }
 
   axios({
@@ -23,12 +23,12 @@ function login() {
     },
   })
     .then(function (response) {
-      // console.log(response);
+      console.log(response);
       if (response.data.code == 200) {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.data.token);
         localStorage.setItem("uname", uname);
-        console.log(uname);
         window.location.href = "./index.html";
+        return true;
       } else {
         alert(response.data.msg);
       }
@@ -36,6 +36,7 @@ function login() {
     .catch(function (error) {
       console.log(error);
     });
+  return false;
 }
 
 function isEmpty(str) {
