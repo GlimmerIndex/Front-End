@@ -62,18 +62,18 @@ var Main = {
     handleCommand(command) {
       this.$message("click on item " + command);
     },
-    get_hello(){
-      this.uname=localStorage.getItem("uname")
+    get_hello() {
+      this.uname = localStorage.getItem("uname")
       axios({
         method: "get",
-        url: "http://localhost:8080/user/info/"+localStorage.getItem("uname"),
+        url: host + "user/info/" + localStorage.getItem("uname"),
         headers: { " taken": Token },
       }).then(function (response) {
         if (response.code == 200) {
-          this.type=response.data.userType;
-        }else{
-          this.uname="null"
-          this.type=2;
+          this.type = response.data.userType;
+        } else {
+          this.uname = "null"
+          this.type = 2;
         }
       });
     }
@@ -89,7 +89,7 @@ function Break() {
   if (a == true) {
     axios({
       method: "get",
-      url: "http://host/user/logout",
+      url: host + "user/logout",
       headers: { " taken": Token },
     }).then(function (response) {
       if (response.code == 200) {
@@ -115,14 +115,14 @@ var Main = {
   mounted() {
     this.init();
   },
-  
+
   methods: {
-    init(){
+    init() {
       // alert("wsad");
       var Token = localStorage.getItem("token");
       axios({
         method: "get",
-        url: "http://localhost:8080/show/pdf", 
+        url: host + "show/pdf",
         headers: { 'token': Token },
       })
         .then(function (response) {
@@ -135,18 +135,18 @@ var Main = {
     },
     Delete(a) {
       b = confirm("是否要删除该文档");
-      if(b==true){
+      if (b == true) {
         // alert("wadaw");
-      var Token = localStorage.getItem("token");
-      axios({
-        methods: "get",
-        url: "http://localhost:8080/delete/pdf/" + a,
-      }).then(function (response) {
-        alert(response.msg);
-        return;
-      });
-    }
-    else{return;}
+        var Token = localStorage.getItem("token");
+        axios({
+          methods: "get",
+          url: host + "delete/pdf/" + a,
+        }).then(function (response) {
+          alert(response.msg);
+          return;
+        });
+      }
+      else { return; }
     },
     handleChange(file, fileLists) {
 			// console.log(file);
@@ -176,9 +176,9 @@ new Ctor().$mount("#files");
 var Main = {
   data() {
     return {
-      fileList:  [
-        
-    ]
+      fileList: [
+
+      ]
     };
   },
   methods: {

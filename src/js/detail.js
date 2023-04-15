@@ -1,3 +1,5 @@
+var host = "http://localhost:8080/"
+
 var Main = {
   data(){
     return{
@@ -62,18 +64,18 @@ var Main = {
     handleCommand(command) {
       this.$message("click on item " + command);
     },
-    get_hello(){
-      this.uname=localStorage.getItem("uname")
+    get_hello() {
+      this.uname = localStorage.getItem("uname")
       axios({
         method: "get",
-        url: "http://localhost:8080/user/info/"+localStorage.getItem("uname"),
-        headers: { " taken": Token },
+        url: host + "user/info/" + localStorage.getItem("uname"),
+        headers: { " token": Token },
       }).then(function (response) {
         if (response.code == 200) {
-          this.type=response.data.userType;
-        }else{
-          this.uname="null"
-          this.type=2;
+          this.type = response.data.userType;
+        } else {
+          this.uname = "null"
+          this.type = 2;
         }
       });
     }
@@ -89,7 +91,7 @@ function Break() {
   if (a == true) {
     axios({
       method: "get",
-      url: "http://host/user/logout",
+      url: host + "user/logout",
       headers: { " taken": Token },
     }).then(function (response) {
       if (response.code == 200) {
@@ -139,17 +141,17 @@ var Main = {
           c_urlArray[c_key] = c_value;
         }
       }
-      if((!c_urlArray['index'])||(!c_urlArray['keyword'])){
+      if ((!c_urlArray['index']) || (!c_urlArray['keyword'])) {
         alert("无相关页面！");
       }
       axios({
         method: "get",
-        url: "http://host/index/"+keyword+"/1",
+        url: host + "index/" + keyword + "/1",
         headers: { token: Token },
       })
         .then(function (response) {
           if (response.code == 200) {
-            this.tableData=response.data[c_urlArray['index']];
+            this.tableData = response.data[c_urlArray['index']];
           } else {
             alert(response.msg);
           }
@@ -158,35 +160,35 @@ var Main = {
         .catch(function (error) {
           console.log(error);
         });
-        time=tableData.uploadTime.match('/.*(?=[A-Z])/g');
+      time = tableData.uploadTime.match('/.*(?=[A-Z])/g');
     },
-    get_like(){
+    get_like() {
       axios({
         method: "get",
-        url: "http://localhost:8080/is/liked",
+        url: host + "/is/liked",
         headers: { token: Token },
         data: {
           likedFileId: this.tableData.fileID,
         },
       })
         .then(function (response) {
-          isLike=(response.code==4026);
+          isLike = (response.code == 4026);
         })
         .catch(function (error) {
           console.log(error);
         });
     },
-    get_dislike(){
+    get_dislike() {
       axios({
         method: "get",
-        url: "http://localhost:8080/is/disliked",
+        url: host + "is/disliked",
         headers: { token: Token },
         data: {
           likedFileId: this.tableData.fileID,
         },
       })
         .then(function (response) {
-          isDislike=(response.code==4026);
+          isDislike = (response.code == 4026);
         })
         .catch(function (error) {
           console.log(error);
@@ -199,7 +201,7 @@ var Main = {
       var Token = localStorage.getItem("token");
       axios({
         method: "post",
-        url: "http://localhost:8080/dislike/pdf",
+        url: host + "dislike/pdf",
         headers: { token: Token },
         data: {
           likedFileId: this.tableData.fileID,
@@ -207,7 +209,7 @@ var Main = {
 
       })
         .then(function (response) {
-          if(response.code==4025)
+          if (response.code == 4025)
             alert(response.msg);
         })
         .catch(function (error) {
@@ -222,14 +224,14 @@ var Main = {
       var Token = localStorage.getItem("token");
       axios({
         method: "post",
-        url: "http://localhost:8080/like/pdf",
+        url: host + "like/pdf",
         headers: { token: Token },
         data: {
           likedFileId: this.tableData.fileID,
         },
       })
         .then(function (response) {
-          if(response.code==4025)
+          if (response.code == 4025)
             alert(response.msg);
         })
         .catch(function (error) {
@@ -240,27 +242,27 @@ var Main = {
       console.log(number);
       this.pagenumber = number;
     },
-    download(){
+    download() {
       axios({
         method: "get",
-        url: "http://localhost:8080/download/"+this.tableData.fileID,
+        url: host + "download/" + this.tableData.fileID,
         headers: { token: Token },
       })
         .catch(function (error) {
           console.log(error);
         });
     },
-    get_pdf(){
+    get_pdf() {
       axios({
         method: "get",
-        url: "http://localhost:8080/preview/pdf/"+this.tableData.fileID,
+        url: host + "preview/pdf/" + this.tableData.fileID,
         headers: { token: Token },
       })
-        .then(function (response){
-            if(response.code==4028)
-              filePath=response.msg;
-            else
-              alert(response.msg);
+        .then(function (response) {
+          if (response.code == 4028)
+            filePath = response.msg;
+          else
+            alert(response.msg);
         })
         .catch(function (error) {
           console.log(error);
