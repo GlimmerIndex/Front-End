@@ -10,7 +10,7 @@ var Main = {
   },
   methods: {
     charge(){
-      return false;
+      // return false;
       var Token = localStorage.getItem("token");
       return !Token;
     },
@@ -52,7 +52,7 @@ var Main = {
       activeIndex: "1",
       activeIndex2: "1",
       type: 1,
-      uname: '萧炎',
+      uname: 'null',
     };
   },
   methods: {

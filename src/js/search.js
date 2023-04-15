@@ -1,35 +1,39 @@
 var Main = {
-  data() {
-    return {
-      activeIndex: "1",
-      activeIndex2: "1",
-      type: 1,
-      uname: '萧炎',
-    };
-  },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleCommand(command) {
-      this.$message("click on item " + command);
-    },
-    get_hello(){
-      axios({
-        method: "",
-        url: "",
-        headers: { " taken": Token },
-      }).then(function (response) {
-        if (response.code == 1) {
-          uname='萧炎';
-          type=1;
-        }
-      });
+  data(){
+    return{
+      isLogin: true,
+      input_uname: "",
+      input_password: "",
+      input_mail: "",
+      check_password: "",
     }
   },
+  methods: {
+    charge(){
+      // return false;
+      var Token = localStorage.getItem("token");
+      return !Token;
+    },
+  }
+}
+var Ctor = Vue.extend(Main);
+new Ctor().$mount("#login");
+
+var Main = {
+  data() {
+    return {
+      input: "",
+    };
+  },
+  methods:{
+    searcH() {
+      window.location.href = "/src/html/search.html?keyword=" + this.input;
+    },
+  }
 };
 var Ctor = Vue.extend(Main);
-new Ctor().$mount("#header");
+new Ctor().$mount("#search");
+
 
 // 退出登录
 function ch_user() {
@@ -48,7 +52,7 @@ var Main = {
       activeIndex: "1",
       activeIndex2: "1",
       type: 1,
-      uname: '萧炎',
+      uname: 'null',
     };
   },
   methods: {
@@ -119,322 +123,7 @@ var Main = {
       input: "",
       currentPage: 1,
       pagesize: 10,
-
-
-      tableData: [
-        {
-          fileName: "斗破苍穹1",
-          fileID: "1",
-          data: [
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "1",
-              content:
-                '在将所有的物资准备齐全之后，剩下的两日时间，<span class="highlight_glimmer">萧炎</span>便停止了忙碌，静下心来享受着这极其短暂的平静生活，而似是清楚<span class="highlight_glimmer">萧炎</span>此时的心情，所以药老也一直没有出言打扰，任由他自己安排着时间',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '从拍卖场出来，<span class="highlight_glimmer">萧炎</span>立在人流拥挤的街道分岔口，望着这片相处了十多年的城市，许久之后，有些落寞的轻叹了一口气，旋即紧紧的握着拳头，似是在给自己打气般的轻声道：“外面的世界，一定会更精彩…”说完，<span class="highlight_glimmer">萧炎</span>笑了笑，甩去心中的一些惆怅，迈动着脚步，汇进人流之中，迅速消失不见。',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "2",
-              content:
-                '<span class="highlight_glimmer">萧炎</span>这两日的安静，也让得有些敏感的薰儿察觉到了什么，于是，小妮子一没事，就跟在前者身边，水灵的眸子中，泛着浓浓的不舍与眷恋。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹2",
-          fileID: "2",
-          data: [
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "3",
-              content:
-                '顺着小路，行进自己的房间之中，<span class="highlight_glimmer">萧炎<span>从枕头下，取出三枚纳戒，将暗红色的一只戴在手指上，其余的两枚，则是小心的揣进了怀中，三枚纳戒虽然是低级，不过也能算作是珍贵之物，行走在外，财不露白，这点道理，<span class="highlight_glimmer">萧炎<span>还是明白得很清楚。',
-            },
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '行走在家族的小路上，<span class="highlight_glimmer">萧炎<span>舒展了一下懒腰，今天，便是离开的时候，刚才他已经去见了父亲，也与他说了自己的打算。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹1",
-          fileID: "1",
-          data: [
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "1",
-              content:
-                '在将所有的物资准备齐全之后，剩下的两日时间，<span class="highlight_glimmer">萧炎</span>便停止了忙碌，静下心来享受着这极其短暂的平静生活，而似是清楚<span class="highlight_glimmer">萧炎</span>此时的心情，所以药老也一直没有出言打扰，任由他自己安排着时间',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '从拍卖场出来，<span class="highlight_glimmer">萧炎<span>立在人流拥挤的街道分岔口，望着这片相处了十多年的城市，许久之后，有些落寞的轻叹了一口气，旋即紧紧的握着拳头，似是在给自己打气般的轻声道：“外面的世界，一定会更精彩…”说完，<span class="highlight_glimmer">萧炎<span>笑了笑，甩去心中的一些惆怅，迈动着脚步，汇进人流之中，迅速消失不见。',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "2",
-              content:
-                '<span class="highlight_glimmer">萧炎<span>这两日的安静，也让得有些敏感的薰儿察觉到了什么，于是，小妮子一没事，就跟在前者身边，水灵的眸子中，泛着浓浓的不舍与眷恋。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹2",
-          fileID: "2",
-          data: [
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "3",
-              content:
-                '顺着小路，行进自己的房间之中，<span class="highlight_glimmer">萧炎<span>从枕头下，取出三枚纳戒，将暗红色的一只戴在手指上，其余的两枚，则是小心的揣进了怀中，三枚纳戒虽然是低级，不过也能算作是珍贵之物，行走在外，财不露白，这点道理，<span class="highlight_glimmer">萧炎<span>还是明白得很清楚。',
-            },
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '行走在家族的小路上，<span class="highlight_glimmer">萧炎<span>舒展了一下懒腰，今天，便是离开的时候，刚才他已经去见了父亲，也与他说了自己的打算。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹1",
-          fileID: "1",
-          data: [
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "1",
-              content:
-                '在将所有的物资准备齐全之后，剩下的两日时间，<span class="highlight_glimmer">萧炎</span>便停止了忙碌，静下心来享受着这极其短暂的平静生活，而似是清楚<span class="highlight_glimmer">萧炎</span>此时的心情，所以药老也一直没有出言打扰，任由他自己安排着时间',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '从拍卖场出来，<span class="highlight_glimmer">萧炎<span>立在人流拥挤的街道分岔口，望着这片相处了十多年的城市，许久之后，有些落寞的轻叹了一口气，旋即紧紧的握着拳头，似是在给自己打气般的轻声道：“外面的世界，一定会更精彩…”说完，<span class="highlight_glimmer">萧炎<span>笑了笑，甩去心中的一些惆怅，迈动着脚步，汇进人流之中，迅速消失不见。',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "2",
-              content:
-                '<span class="highlight_glimmer">萧炎<span>这两日的安静，也让得有些敏感的薰儿察觉到了什么，于是，小妮子一没事，就跟在前者身边，水灵的眸子中，泛着浓浓的不舍与眷恋。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹2",
-          fileID: "2",
-          data: [
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "3",
-              content:
-                '顺着小路，行进自己的房间之中，<span class="highlight_glimmer">萧炎<span>从枕头下，取出三枚纳戒，将暗红色的一只戴在手指上，其余的两枚，则是小心的揣进了怀中，三枚纳戒虽然是低级，不过也能算作是珍贵之物，行走在外，财不露白，这点道理，<span class="highlight_glimmer">萧炎<span>还是明白得很清楚。',
-            },
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '行走在家族的小路上，<span class="highlight_glimmer">萧炎<span>舒展了一下懒腰，今天，便是离开的时候，刚才他已经去见了父亲，也与他说了自己的打算。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹1",
-          fileID: "1",
-          data: [
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "1",
-              content:
-                '在将所有的物资准备齐全之后，剩下的两日时间，<span class="highlight_glimmer">萧炎</span>便停止了忙碌，静下心来享受着这极其短暂的平静生活，而似是清楚<span class="highlight_glimmer">萧炎</span>此时的心情，所以药老也一直没有出言打扰，任由他自己安排着时间',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '从拍卖场出来，<span class="highlight_glimmer">萧炎<span>立在人流拥挤的街道分岔口，望着这片相处了十多年的城市，许久之后，有些落寞的轻叹了一口气，旋即紧紧的握着拳头，似是在给自己打气般的轻声道：“外面的世界，一定会更精彩…”说完，<span class="highlight_glimmer">萧炎<span>笑了笑，甩去心中的一些惆怅，迈动着脚步，汇进人流之中，迅速消失不见。',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "2",
-              content:
-                '<span class="highlight_glimmer">萧炎<span>这两日的安静，也让得有些敏感的薰儿察觉到了什么，于是，小妮子一没事，就跟在前者身边，水灵的眸子中，泛着浓浓的不舍与眷恋。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹2",
-          fileID: "2",
-          data: [
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "3",
-              content:
-                '顺着小路，行进自己的房间之中，<span class="highlight_glimmer">萧炎<span>从枕头下，取出三枚纳戒，将暗红色的一只戴在手指上，其余的两枚，则是小心的揣进了怀中，三枚纳戒虽然是低级，不过也能算作是珍贵之物，行走在外，财不露白，这点道理，<span class="highlight_glimmer">萧炎<span>还是明白得很清楚。',
-            },
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '行走在家族的小路上，<span class="highlight_glimmer">萧炎<span>舒展了一下懒腰，今天，便是离开的时候，刚才他已经去见了父亲，也与他说了自己的打算。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹1",
-          fileID: "1",
-          data: [
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "1",
-              content:
-                '在将所有的物资准备齐全之后，剩下的两日时间，<span class="highlight_glimmer">萧炎</span>便停止了忙碌，静下心来享受着这极其短暂的平静生活，而似是清楚<span class="highlight_glimmer">萧炎</span>此时的心情，所以药老也一直没有出言打扰，任由他自己安排着时间',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '从拍卖场出来，<span class="highlight_glimmer">萧炎</span>立在人流拥挤的街道分岔口，望着这片相处了十多年的城市，许久之后，有些落寞的轻叹了一口气，旋即紧紧的握着拳头，似是在给自己打气般的轻声道：“外面的世界，一定会更精彩…”说完，<span class="highlight_glimmer">萧炎<span>笑了笑，甩去心中的一些惆怅，迈动着脚步，汇进人流之中，迅速消失不见。',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "2",
-              content:
-                '<span class="highlight_glimmer">萧炎</span>这两日的安静，也让得有些敏感的薰儿察觉到了什么，于是，小妮子一没事，就跟在前者身边，水灵的眸子中，泛着浓浓的不舍与眷恋。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹2",
-          fileID: "2",
-          data: [
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "3",
-              content:
-                '顺着小路，行进自己的房间之中，<span class="highlight_glimmer">萧炎</span>从枕头下，取出三枚纳戒，将暗红色的一只戴在手指上，其余的两枚，则是小心的揣进了怀中，三枚纳戒虽然是低级，不过也能算作是珍贵之物，行走在外，财不露白，这点道理，<span class="highlight_glimmer">萧炎<span>还是明白得很清楚。',
-            },
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '行走在家族的小路上，<span class="highlight_glimmer">萧炎</span>舒展了一下懒腰，今天，便是离开的时候，刚才他已经去见了父亲，也与他说了自己的打算。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹1",
-          fileID: "1",
-          data: [
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "1",
-              content:
-                '在将所有的物资准备齐全之后，剩下的两日时间，<span class="highlight_glimmer">萧炎</span>便停止了忙碌，静下心来享受着这极其短暂的平静生活，而似是清楚<span class="highlight_glimmer">萧炎</span>此时的心情，所以药老也一直没有出言打扰，任由他自己安排着时间',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '从拍卖场出来，<span class="highlight_glimmer">萧炎</span>立在人流拥挤的街道分岔口，望着这片相处了十多年的城市，许久之后，有些落寞的轻叹了一口气，旋即紧紧的握着拳头，似是在给自己打气般的轻声道：“外面的世界，一定会更精彩…”说完，<span class="highlight_glimmer">萧炎<span>笑了笑，甩去心中的一些惆怅，迈动着脚步，汇进人流之中，迅速消失不见。',
-            },
-            {
-              id: null,
-              pdfId: "1",
-              pageId: "2",
-              paraId: "2",
-              content:
-                '<span class="highlight_glimmer">萧炎</span>这两日的安静，也让得有些敏感的薰儿察觉到了什么，于是，小妮子一没事，就跟在前者身边，水灵的眸子中，泛着浓浓的不舍与眷恋。',
-            },
-          ],
-        },
-        {
-          fileName: "斗破苍穹2",
-          fileID: "2",
-          data: [
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "3",
-              content:
-                '顺着小路，行进自己的房间之中，<span class="highlight_glimmer">萧炎</span>从枕头下，取出三枚纳戒，将暗红色的一只戴在手指上，其余的两枚，则是小心的揣进了怀中，三枚纳戒虽然是低级，不过也能算作是珍贵之物，行走在外，财不露白，这点道理，<span class="highlight_glimmer">萧炎<span>还是明白得很清楚。',
-            },
-            {
-              id: null,
-              pdfId: "2",
-              pageId: "1",
-              paraId: "1",
-              content:
-                '行走在家族的小路上，<span class="highlight_glimmer">萧炎</span>舒展了一下懒腰，今天，便是离开的时候，刚才他已经去见了父亲，也与他说了自己的打算。',
-            },
-          ],
-        },
-      ],
+      tableData: new Array(),
       // 利用vue改变tabledata的值，当条数大于20时进行分页，并且在题名添加链接跳转
     };
   },
