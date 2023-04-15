@@ -129,9 +129,6 @@ var Main = {
       // 利用vue改变tabledata的值，当条数大于20时进行分页，并且在题名添加链接跳转
     };
   },
-  mounted() {
-    this.SearcH();
-  },
   methods: {
     detail(a) {
       window.location.href = "/src/html/detail.html?keyword=" + this.input + "&index=" + this.tableData.indexOf(a);
@@ -158,7 +155,7 @@ var Main = {
         });
     },
     searcH() {
-      // window.location.href = "/src/html/search.html?keyword=" + this.input;
+      window.location.href = "/src/html/search.html?keyword=" + this.input;
     },
     SearcH() {
       //获取url
@@ -180,16 +177,18 @@ var Main = {
       // alert(c_urlArray["keyword"]);
       // alert("wsad");
       var Token = localStorage.getItem("token");
+      // console.log(c_urlArray["keyword"]);
+      var main_this = this;
       axios({
         method: "get",
         url: host + "index/" + c_urlArray["keyword"] + "/1", //传参？
         headers: { token: Token },
       })
         .then(function (response) {
-          if (response.code == 200) {
-            this.tableData = response.data;
+          if (response.data.code == 200) {
+            main_this.tableData = response.data.data;
           } else {
-            alert(response.msg);
+            alert(response.data.msg);
           }
         })
         .catch(function (error) {
@@ -243,6 +242,11 @@ var Main = {
       console.log(this.currentPage); //点击第几页
     },
   },
+  mounted() {
+    this.SearcH();
+    // console.log("Main");
+    // console.log(this.tableData);
+  }
 };
 var Ctor = Vue.extend(Main);
-new Ctor().$mount("main");
+new Ctor().$mount("#main");

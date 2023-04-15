@@ -14,8 +14,10 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/src/js/search.js" defer></script>
+    <script src="/src/js/login.js" defer></script>
 </head>
-<body >
+
+<body>
     <!-- 顶部导航栏 -->
     <div id="header">
         <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect"
@@ -27,7 +29,8 @@
                 </a>
             </el-menu-item>
             <el-menu-item index="0" id="hello-tag" onload="get_hello()">
-                <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2" v-else>管理员</span><span id="account-name"> {{ uname }} 您好！</span>
+                <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2" v-else>管理员</span><span
+                    id="account-name"> {{ uname }} 您好！</span>
                 <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
             </el-menu-item>
             <!-- 用户中心标签 -->
@@ -65,9 +68,10 @@
                 style=" position: relative;">搜索</el-button>
         </div>
 
-        <div id="article">
+        <div id="main">
             <template>
-                <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)"  style="width: 100%">
+                <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
+                    style="width: 100%">
                     <el-table-column type="expand">
                         <template slot-scope="props">
                             <el-form label-position="left" inline class="demo-table-expand">
@@ -96,17 +100,12 @@
                 </el-table>
 
                 <div>
-                    <el-pagination
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="currentPage"
-                    :page-sizes="[10, 30, 90, 120]"
-                    :page-size="pagesize"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="tableData.length">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                        :current-page="currentPage" :page-sizes="[10, 30, 90, 120]" :page-size="pagesize"
+                        layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
                     </el-pagination>
                 </div>
-                
+
             </template>
             <!-- 脚本：利用vue添加各文献的属性 -->
         </div>
