@@ -1,3 +1,5 @@
+var host = "http://localhost:8080/"
+
 function enroll(name) {
   // var name = $("#name").val();
   var new_uname = $("#new_uname").val();
@@ -21,7 +23,7 @@ function enroll(name) {
     alert("密码输入不可为空");
     return;
   }
-  if(!(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/.test(email))){
+  if (!(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/.test(email))) {
     alert("邮箱输入不符合规则");
     return;
   }
@@ -32,7 +34,7 @@ function enroll(name) {
   // alert("账号注册成功！");
 
   axios
-    .post("http://localhost:8080/user/register", {
+    .post(host + "user/register", {
       userName: new_uname,
       password: password,
       email: email,

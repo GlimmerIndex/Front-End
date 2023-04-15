@@ -1,3 +1,5 @@
+var host = "http://localhost:8080/"
+
 function login() {
   // window.location.href = "../User/user.html"
   var password = $("#password").val();
@@ -13,7 +15,7 @@ function login() {
 
   axios({
     method: "post",
-    url: "http://host/user/login",
+    url: host + "user/login",
     headers: { "Content-Type": "application/json" },
     data: {
       userName: uname,
@@ -23,7 +25,7 @@ function login() {
     .then(function (response) {
       if (response.code == 200) {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("uname",uname);
+        localStorage.setItem("uname", uname);
         window.location.href = "../User/user.html";
       } else {
         alert(response.msg);

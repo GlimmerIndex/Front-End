@@ -1,3 +1,5 @@
+var host = "http://localhost:8080/"
+
 var Main = {
   data() {
     return {
@@ -14,15 +16,15 @@ var Main = {
     handleCommand(command) {
       this.$message("click on item " + command);
     },
-    get_hello(){
+    get_hello() {
       axios({
         method: "",
         url: "",
         headers: { " taken": Token },
       }).then(function (response) {
         if (response.code == 1) {
-          uname='萧炎';
-          type=1;
+          uname = '萧炎';
+          type = 1;
         }
       });
     }
@@ -58,18 +60,18 @@ var Main = {
     handleCommand(command) {
       this.$message("click on item " + command);
     },
-    get_hello(){
-      this.uname=localStorage.getItem("uname")
+    get_hello() {
+      this.uname = localStorage.getItem("uname")
       axios({
         method: "get",
-        url: "http://localhost:8080/user/info/"+localStorage.getItem("uname"),
+        url: host + "user/info/" + localStorage.getItem("uname"),
         headers: { " taken": Token },
       }).then(function (response) {
         if (response.code == 200) {
-          this.type=response.data.userType;
-        }else{
-          this.uname="null"
-          this.type=2;
+          this.type = response.data.userType;
+        } else {
+          this.uname = "null"
+          this.type = 2;
         }
       });
     }
@@ -85,7 +87,7 @@ function Break() {
   if (a == true) {
     axios({
       method: "get",
-      url: "http://host/user/logout",
+      url: host + "user/logout",
       headers: { " taken": Token },
     }).then(function (response) {
       if (response.code == 200) {
@@ -161,7 +163,7 @@ var Main = {
     return {
       currentPage: 1,
       pagesize: 10,
-      tableData:  [
+      tableData: [
         {
           "id": 1642830312792764417,
           "fileName": "微积分全册 电子科技大学.pdf",
@@ -177,8 +179,8 @@ var Main = {
           "uuidFileName": "null",
           "likeNumber": 0,
           "dislikeNumber": 1
-      },
-      {
+        },
+        {
           "id": 1642845455069003778,
           "fileName": "CProg20220604.pdf",
           "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
@@ -193,175 +195,175 @@ var Main = {
           "uuidFileName": "null",
           "likeNumber": 0,
           "dislikeNumber": 1
-      },{
-        "id": 1642830312792764417,
-        "fileName": "微积分全册 电子科技大学.pdf",
-        "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
-        "fileSize": 11294748,
-        "fileType": "pdf",
-        "uploadTime": "2023-04-03T10:04:03.000+00:00",
-        "uploadBy": 1637028625444241413,
-        "updateTime": null,
-        "updateBy": null,
-        "delFlag": null,
-        "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
-        "uuidFileName": "null",
-        "likeNumber": 0,
-        "dislikeNumber": 1
-    },
-    {
-        "id": 1642845455069003778,
-        "fileName": "CProg20220604.pdf",
-        "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
-        "fileSize": 5869634,
-        "fileType": "pdf",
-        "uploadTime": "2023-04-03T11:04:14.000+00:00",
-        "uploadBy": 1637028625444241413,
-        "updateTime": null,
-        "updateBy": null,
-        "delFlag": null,
-        "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
-        "uuidFileName": "null",
-        "likeNumber": 0,
-        "dislikeNumber": 1
-    },{
-      "id": 1642830312792764417,
-      "fileName": "微积分全册 电子科技大学.pdf",
-      "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
-      "fileSize": 11294748,
-      "fileType": "pdf",
-      "uploadTime": "2023-04-03T10:04:03.000+00:00",
-      "uploadBy": 1637028625444241413,
-      "updateTime": null,
-      "updateBy": null,
-      "delFlag": null,
-      "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
-      "uuidFileName": "null",
-      "likeNumber": 0,
-      "dislikeNumber": 1
-  },
-  {
-      "id": 1642845455069003778,
-      "fileName": "CProg20220604.pdf",
-      "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
-      "fileSize": 5869634,
-      "fileType": "pdf",
-      "uploadTime": "2023-04-03T11:04:14.000+00:00",
-      "uploadBy": 1637028625444241413,
-      "updateTime": null,
-      "updateBy": null,
-      "delFlag": null,
-      "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
-      "uuidFileName": "null",
-      "likeNumber": 0,
-      "dislikeNumber": 1
-  },{
-    "id": 1642830312792764417,
-    "fileName": "微积分全册 电子科技大学.pdf",
-    "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
-    "fileSize": 11294748,
-    "fileType": "pdf",
-    "uploadTime": "2023-04-03T10:04:03.000+00:00",
-    "uploadBy": 1637028625444241413,
-    "updateTime": null,
-    "updateBy": null,
-    "delFlag": null,
-    "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
-    "uuidFileName": "null",
-    "likeNumber": 0,
-    "dislikeNumber": 1
-},
-{
-    "id": 1642845455069003778,
-    "fileName": "CProg20220604.pdf",
-    "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
-    "fileSize": 5869634,
-    "fileType": "pdf",
-    "uploadTime": "2023-04-03T11:04:14.000+00:00",
-    "uploadBy": 1637028625444241413,
-    "updateTime": null,
-    "updateBy": null,
-    "delFlag": null,
-    "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
-    "uuidFileName": "null",
-    "likeNumber": 0,
-    "dislikeNumber": 1
-},{
-  "id": 1642830312792764417,
-  "fileName": "微积分全册 电子科技大学.pdf",
-  "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
-  "fileSize": 11294748,
-  "fileType": "pdf",
-  "uploadTime": "2023-04-03T10:04:03.000+00:00",
-  "uploadBy": 1637028625444241413,
-  "updateTime": null,
-  "updateBy": null,
-  "delFlag": null,
-  "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
-  "uuidFileName": "null",
-  "likeNumber": 0,
-  "dislikeNumber": 1
-},
-{
-  "id": 1642845455069003778,
-  "fileName": "CProg20220604.pdf",
-  "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
-  "fileSize": 5869634,
-  "fileType": "pdf",
-  "uploadTime": "2023-04-03T11:04:14.000+00:00",
-  "uploadBy": 1637028625444241413,
-  "updateTime": null,
-  "updateBy": null,
-  "delFlag": null,
-  "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
-  "uuidFileName": "null",
-  "likeNumber": 0,
-  "dislikeNumber": 1
-},{
-  "id": 1642830312792764417,
-  "fileName": "微积分全册 电子科技大学.pdf",
-  "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
-  "fileSize": 11294748,
-  "fileType": "pdf",
-  "uploadTime": "2023-04-03T10:04:03.000+00:00",
-  "uploadBy": 1637028625444241413,
-  "updateTime": null,
-  "updateBy": null,
-  "delFlag": null,
-  "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
-  "uuidFileName": "null",
-  "likeNumber": 0,
-  "dislikeNumber": 1
-},
-{
-  "id": 1642845455069003778,
-  "fileName": "CProg20220604.pdf",
-  "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
-  "fileSize": 5869634,
-  "fileType": "pdf",
-  "uploadTime": "2023-04-03T11:04:14.000+00:00",
-  "uploadBy": 1637028625444241413,
-  "updateTime": null,
-  "updateBy": null,
-  "delFlag": null,
-  "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
-  "uuidFileName": "null",
-  "likeNumber": 0,
-  "dislikeNumber": 1
-},],
+        }, {
+          "id": 1642830312792764417,
+          "fileName": "微积分全册 电子科技大学.pdf",
+          "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
+          "fileSize": 11294748,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T10:04:03.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        },
+        {
+          "id": 1642845455069003778,
+          "fileName": "CProg20220604.pdf",
+          "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
+          "fileSize": 5869634,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T11:04:14.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        }, {
+          "id": 1642830312792764417,
+          "fileName": "微积分全册 电子科技大学.pdf",
+          "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
+          "fileSize": 11294748,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T10:04:03.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        },
+        {
+          "id": 1642845455069003778,
+          "fileName": "CProg20220604.pdf",
+          "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
+          "fileSize": 5869634,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T11:04:14.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        }, {
+          "id": 1642830312792764417,
+          "fileName": "微积分全册 电子科技大学.pdf",
+          "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
+          "fileSize": 11294748,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T10:04:03.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        },
+        {
+          "id": 1642845455069003778,
+          "fileName": "CProg20220604.pdf",
+          "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
+          "fileSize": 5869634,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T11:04:14.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        }, {
+          "id": 1642830312792764417,
+          "fileName": "微积分全册 电子科技大学.pdf",
+          "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
+          "fileSize": 11294748,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T10:04:03.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        },
+        {
+          "id": 1642845455069003778,
+          "fileName": "CProg20220604.pdf",
+          "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
+          "fileSize": 5869634,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T11:04:14.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        }, {
+          "id": 1642830312792764417,
+          "fileName": "微积分全册 电子科技大学.pdf",
+          "filePath": "PDFFiles/03a2448f-01c7-4081-8625-94a9d7d1d8d6-微积分全册 电子科技大学.pdf",
+          "fileSize": 11294748,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T10:04:03.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "SDkq9Z9OAUYVcFoI21lG49e7CwnQbdjl2egs19vDuhU=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        },
+        {
+          "id": 1642845455069003778,
+          "fileName": "CProg20220604.pdf",
+          "filePath": "PDFFiles/59cd1699-bffc-46a9-95a1-a3afd6e13e41-CProg20220604.pdf",
+          "fileSize": 5869634,
+          "fileType": "pdf",
+          "uploadTime": "2023-04-03T11:04:14.000+00:00",
+          "uploadBy": 1637028625444241413,
+          "updateTime": null,
+          "updateBy": null,
+          "delFlag": null,
+          "hashFileName": "claAWPBAci1Yhu7f/fsmgCaXTrzEFGZ6ZtzK1IcCMH4=",
+          "uuidFileName": "null",
+          "likeNumber": 0,
+          "dislikeNumber": 1
+        },],
     };
   },
   mounted() {
     this.init();
   },
-  
+
   methods: {
-    init(){
+    init() {
       // alert("wsad");
       var Token = localStorage.getItem("token");
       axios({
         method: "get",
-        url: "http://localhost:8080/show/pdf", 
+        url: host + "show/pdf",
         headers: { 'token': Token },
       })
         .then(function (response) {
@@ -379,37 +381,37 @@ var Main = {
     },
     Delete(a) {
       b = confirm("是否要删除该文档");
-      if(b==true){
+      if (b == true) {
         // alert("wadaw");
-      var Token = localStorage.getItem("token");
-      axios({
-        methods: "get",
-        url: "http://localhost:8080/delete/pdf/" + a,
-      }).then(function (response) {
-        alert(response.msg);
-        return;
-      });
-    }
-    else{return;}
+        var Token = localStorage.getItem("token");
+        axios({
+          methods: "get",
+          url: host + "delete/pdf/" + a,
+        }).then(function (response) {
+          alert(response.msg);
+          return;
+        });
+      }
+      else { return; }
     },
     handleChange(file, fileLists) {
-			console.log(file);
-			console.log(fileLists);
-			// 本地服务器路径
-			console.log(URL.createObjectURL(file.raw));
-			// 本地电脑路径
-			console.log(document.getElementsByClassName("el-upload__input")[0].value); 
-		},
-    handleSizeChange (size) {
-      console.log(size,'size');
-    this.pagesize = size;
-    console.log(this.pagesize); //每页下拉显示数据
-  },
-  handleCurrentChange (currentPage) {
-      console.log(currentPage,'currentPage');
-    this.currentPage = currentPage;
-    console.log(this.currentPage); //点击第几页
-  },
+      console.log(file);
+      console.log(fileLists);
+      // 本地服务器路径
+      console.log(URL.createObjectURL(file.raw));
+      // 本地电脑路径
+      console.log(document.getElementsByClassName("el-upload__input")[0].value);
+    },
+    handleSizeChange(size) {
+      console.log(size, 'size');
+      this.pagesize = size;
+      console.log(this.pagesize); //每页下拉显示数据
+    },
+    handleCurrentChange(currentPage) {
+      console.log(currentPage, 'currentPage');
+      this.currentPage = currentPage;
+      console.log(this.currentPage); //点击第几页
+    },
   }
 
 
@@ -420,9 +422,9 @@ new Ctor().$mount("#files");
 var Main = {
   data() {
     return {
-      fileList:  [
-        
-    ]
+      fileList: [
+
+      ]
     };
   },
   methods: {

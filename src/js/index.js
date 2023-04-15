@@ -1,6 +1,8 @@
+var host = "http://localhost:8080/"
+
 var Main = {
-  data(){
-    return{
+  data() {
+    return {
       isLogin: true,
       input_uname: "",
       input_password: "",
@@ -9,7 +11,7 @@ var Main = {
     }
   },
   methods: {
-    charge(){
+    charge() {
       return false;
       var Token = localStorage.getItem("token");
       return !Token;
@@ -25,9 +27,9 @@ var Main = {
       input: "",
     };
   },
-  methods:{
+  methods: {
     searcH() {
-      window.location.href = "/src/html/search.html?keyword=" + this.input;
+      window.location.href = "./src/html/search.html?keyword=" + this.input;
     },
   }
 };
@@ -39,7 +41,7 @@ new Ctor().$mount("#search");
 function ch_user() {
   a = confirm("是否要退出并重新登录");
   if (a == true) {
-    localStorage.setItem("token", 0);
+    localStorage.setItem("token", null);
     window.location.href = "/index.html";
   } else {
     return;
@@ -62,18 +64,18 @@ var Main = {
     handleCommand(command) {
       this.$message("click on item " + command);
     },
-    get_hello(){
-      this.uname=localStorage.getItem("uname")
+    get_hello() {
+      this.uname = localStorage.getItem("uname")
       axios({
         method: "get",
-        url: "http://localhost:8080/user/info/"+localStorage.getItem("uname"),
+        url: host + "user/info/" + localStorage.getItem("uname"),
         headers: { " taken": Token },
       }).then(function (response) {
         if (response.code == 200) {
-          this.type=response.data.userType;
-        }else{
-          this.uname="null"
-          this.type=2;
+          this.type = response.data.userType;
+        } else {
+          this.uname = "null"
+          this.type = 2;
         }
       });
     }
@@ -89,8 +91,8 @@ function Break() {
   if (a == true) {
     axios({
       method: "get",
-      url: "http://host/user/logout",
-      headers: { " taken": Token },
+      url: host + "user/logout",
+      headers: { " token": Token },
     }).then(function (response) {
       if (response.code == 200) {
         alert(response.msg);

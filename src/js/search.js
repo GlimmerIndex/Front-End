@@ -1,3 +1,5 @@
+
+var host = "http://localhost:8080/"
 var Main = {
   data() {
     return {
@@ -14,15 +16,15 @@ var Main = {
     handleCommand(command) {
       this.$message("click on item " + command);
     },
-    get_hello(){
+    get_hello() {
       axios({
         method: "",
         url: "",
         headers: { " taken": Token },
       }).then(function (response) {
         if (response.code == 1) {
-          uname='萧炎';
-          type=1;
+          uname = '萧炎';
+          type = 1;
         }
       });
     }
@@ -58,18 +60,18 @@ var Main = {
     handleCommand(command) {
       this.$message("click on item " + command);
     },
-    get_hello(){
-      this.uname=localStorage.getItem("uname")
+    get_hello() {
+      this.uname = localStorage.getItem("uname")
       axios({
         method: "get",
-        url: "http://localhost:8080/user/info/"+localStorage.getItem("uname"),
+        url: host + "user/info/" + localStorage.getItem("uname"),
         headers: { " taken": Token },
       }).then(function (response) {
         if (response.code == 200) {
-          this.type=response.data.userType;
-        }else{
-          this.uname="null"
-          this.type=2;
+          this.type = response.data.userType;
+        } else {
+          this.uname = "null"
+          this.type = 2;
         }
       });
     }
@@ -85,7 +87,7 @@ function Break() {
   if (a == true) {
     axios({
       method: "get",
-      url: "http://host/user/logout",
+      url: host + "user/logout",
       headers: { " taken": Token },
     }).then(function (response) {
       if (response.code == 200) {
@@ -445,14 +447,14 @@ var Main = {
     detail(a) {
       window.location.href = "/src/html/detail.html?keyword=" + this.input + "&index=" + this.tableData.indexOf(a);
       // alert("scscsd");
-      
+
     },
     downLoad() {
       // alert("scscsd");
       var Token = localStorage.getItem("token");
       axios({
         method: "get",
-        url: "http://localhost:8080/download/pdf",
+        url: host + "download/pdf",
         headers: { token: Token },
       })
         .then(function (response) {
@@ -491,7 +493,7 @@ var Main = {
       var Token = localStorage.getItem("token");
       axios({
         method: "get",
-        url: "http://host/index/" + c_urlArray["keyword"] + "/1", //传参？
+        url: host + "index/" + c_urlArray["keyword"] + "/1", //传参？
         headers: { token: Token },
       })
         .then(function (response) {
@@ -510,7 +512,7 @@ var Main = {
       var Token = localStorage.getItem("token");
       axios({
         method: "post",
-        url: "http://localhost:8080/like/pdf",
+        url: host + "like/pdf",
         headers: { token: Token },
         data: {
           likedFileId: a,
@@ -528,7 +530,7 @@ var Main = {
       var Token = localStorage.getItem("token");
       axios({
         method: "post",
-        url: "http://localhost:8080/dislike/pdf",
+        url: host + "dislike/pdf",
         headers: { token: Token },
         data: {
           dislikedFileId: a,
@@ -541,13 +543,13 @@ var Main = {
           console.log(error);
         });
     },
- handleSizeChange (size) {
-        console.log(size,'size');
+    handleSizeChange(size) {
+      console.log(size, 'size');
       this.pagesize = size;
       console.log(this.pagesize); //每页下拉显示数据
     },
-    handleCurrentChange (currentPage) {
-        console.log(currentPage,'currentPage');
+    handleCurrentChange(currentPage) {
+      console.log(currentPage, 'currentPage');
       this.currentPage = currentPage;
       console.log(this.currentPage); //点击第几页
     },
