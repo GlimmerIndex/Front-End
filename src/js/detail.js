@@ -12,7 +12,7 @@ var Main = {
   },
   methods: {
     charge(){
-      return false;
+      // return false;
       var Token = localStorage.getItem("token");
       return !Token;
     },

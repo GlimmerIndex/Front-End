@@ -3,6 +3,7 @@ var host = "http://localhost:8080/"
 var Plat=navigator.userAgent.match( // 判断不同端
         /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
     );
+console.log(Plat);
 function IsLogin() {
   // return true;
   console.log(localStorage.getItem("token"));
