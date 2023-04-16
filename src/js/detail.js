@@ -12,7 +12,7 @@ var Main = {
   },
   methods: {
     charge(){
-      // return false;
+      return false;
       var Token = localStorage.getItem("token");
       return !Token;
     },
@@ -20,22 +20,6 @@ var Main = {
 }
 var Ctor = Vue.extend(Main);
 new Ctor().$mount("#login");
-
-var Main = {
-  data() {
-    return {
-      input: "",
-    };
-  },
-  methods:{
-    searcH() {
-      window.location.href = "/src/html/search.html?keyword=" + this.input;
-    },
-  }
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#search");
-
 
 // 退出登录
 function ch_user() {
@@ -270,6 +254,5 @@ var Main = {
     },
   },
 };
-
 var Ctor = Vue.extend(Main);
-new Ctor().$mount("main");
+new Ctor().$mount("#main");
