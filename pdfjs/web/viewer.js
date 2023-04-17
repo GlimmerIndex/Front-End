@@ -559,7 +559,7 @@
         },
         set page(val) {
           this.pdfViewer.currentPageNumber = val;
-          
+
         },
         get supportsPrinting() {
           return PDFPrintServiceFactory.instance.supportsPrinting;
@@ -1214,8 +1214,8 @@
 
             //跳转至指定页码
             if (c_urlArray['page'])
-              document.getElementById('pageNumber').value=this.pdfViewer.currentPageNumber = c_urlArray['page'] * 1;
-            
+              document.getElementById('pageNumber').value = this.pdfViewer.currentPageNumber = c_urlArray['page'] * 1;
+
             //页面位置定位
             if (c_urlArray['top'])
               document.getElementById('viewerContainer').scrollTop = document.getElementById('viewerContainer').scrollTop + c_urlArray['top'] * 1;
@@ -1586,9 +1586,9 @@
               return;
             }
             const fileOrigin = new URL(file, window.location.href).origin;
-            if (fileOrigin !== viewerOrigin) {
-              throw new Error("file origin does not match viewer's");
-            }
+            // if (fileOrigin !== viewerOrigin) {
+            //   throw new Error("file origin does not match viewer's");
+            // }
           } catch (ex) {
             PDFViewerApplication.l10n.get("loading_error").then(msg => {
               PDFViewerApplication._documentError(msg, {
@@ -3503,7 +3503,7 @@
         }
         set page(value) {
           this.pdfViewer.currentPageNumber = value;
-          
+
         }
         get rotation() {
           return this.pdfViewer.pagesRotation;
@@ -6800,7 +6800,7 @@
               this.pdfViewer.spreadMode = _ui_utils.SpreadMode.NONE;
             }
             this.pdfViewer.currentPageNumber = this.#args.pageNumber;
-            
+
             this.pdfViewer.currentScaleValue = "page-fit";
             if (this.#args.annotationEditorMode !== null) {
               this.pdfViewer.annotationEditorMode = _pdfjsLib.AnnotationEditorType.NONE;

@@ -225,11 +225,11 @@ function Break() {
       headers: { " taken": Token },
     }).then(function (response) {
       if (response.code == 200) {
-        alert(response.msg);
+        alert(response.data.msg);
         localStorage.setItem("token", 0);
         window.location.href = "/index.html";
       } else {
-        alert("注销失败" + response.msg);
+        alert("注销失败" + response.data.msg);
         return;
       }
     });
@@ -249,29 +249,34 @@ var Main = {
       isDislike: false,
       tableData: {},
       loginstatus: 0,
-      token: ''
+      token: '',
+      fileID: '',
+      fileName: '',
+      fileURL: ''
     };
   },
   mounted() {
     this.token = localStorage.getItem("token");
-    // console.log("debug");
     this.loginstatus = IsLogin();
     console.log(this.loginstatus);
     this.get_information();
+    // console.log(this.fileID);
     this.get_like();
     this.get_dislike();
-    this.get_pdf();
+
+    // this.get_pdf();
 
   },
   methods: {
-    get_information() {
+    async get_information() {
 
       //获取url
       var c_url = window.location.href;
-      // console.log(c_url);
+      console.log("get_info");
+      //console.log(c_url);
       //获取参数
+      var c_urlArray = {}
       if (c_url.indexOf("&") && c_url.indexOf("=")) {
-        var c_urlArray = {}
         var c_val = c_url.split('?')[1];
         var c_valArray = c_val.split('&');
         for (let i = 0; i < c_valArray.length; i++) {
@@ -286,29 +291,68 @@ var Main = {
       this.keyword = c_urlArray['keyword'];
       // sconsole.log(this.keyword);
       var this_ = this;
-      axios({
+      // console.log(host + "index/" + this.keyword + "/1");
+      var index_ = c_urlArray['index']
+      await axios({
         method: "get",
-        url: host + "index/" + this.keyword + "/1",
+        url: host + "index/" + this_.keyword + "/1",
         headers: { token: Token },
       })
         .then(function (response) {
-          // console.log(response);
           if (response.data.code == 200) {
-            this_.tableData = response.data.data[c_urlArray['index']];
+            console.log(index_)
+
+            //console.log(response.data.data[index_])
+            this_.tableData = response.data.data[index_];
+            this_.fileID = response.data.data[index_].fileID;
+            this_.fileName = response.data.data[index_].fileName;
+            console.log("A")
           } else {
-            alert(response.msg);
+            alert(response.data.msg);
           }
 
         })
         .catch(function (error) {
           console.log(error);
         });
-      time = this.tableData.uploadTime; //.match('/.*(?=[A-Z])/g');
+      this.time = this.tableData.uploadTime; //.match('/.*(?=[A-Z])/g');
+      //console.log(tableData)
+
+      console.log("Get_pdf");
+
+      var this_ = this;
+
+      console.log(this_.fileID);
+
+      await axios({
+        method: "get",
+        url: host + "preview/pdf/" + this_.fileID,
+        headers: { token: Token },
+      })
+        .then(function (response) {
+          console.log("B");
+          // console.log(response);
+          if (response.data.code == 4028) {
+            console.log("D");
+            this_.filePath = response.data.msg;
+            this_.fileURL = host + this_.filePath
+            // console.log(this_.filePath)
+            // console.log(this_)
+          }
+
+          else
+            alert(response.data.msg);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      console.log("346")
+      console.log(this_.filePath)
     },
     get_like() {
       var this_ = this;
       axios({
-        method: "get",
+        method: "post",
         url: host + "is/liked",
         headers: { token: Token },
         data: {
@@ -324,8 +368,9 @@ var Main = {
     },
     get_dislike() {
       var this_ = this;
+      console.log("dislike" + this_.tableData.fileID);
       axios({
-        method: "get",
+        method: "post",
         url: host + "is/disliked",
         headers: { token: Token },
         data: {
@@ -356,7 +401,7 @@ var Main = {
       })
         .then(function (response) {
           if (response.data.code == 4025)
-            alert(response.msg);
+            alert(response.data.msg);
         })
         .catch(function (error) {
           console.log(error);
@@ -379,7 +424,7 @@ var Main = {
       })
         .then(function (response) {
           if (response.code == 4025)
-            alert(response.msg);
+            alert(response.data.msg);
         })
         .catch(function (error) {
           console.log(error);
@@ -401,21 +446,7 @@ var Main = {
         });
     },
     get_pdf() {
-      var this_ = this;
-      axios({
-        method: "get",
-        url: host + "preview/pdf/" + this_.tableData.fileID,
-        headers: { token: Token },
-      })
-        .then(function (response) {
-          if (response.code == 4028)
-            filePath = response.msg;
-          else
-            alert(response.msg);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+
     },
   },
 };

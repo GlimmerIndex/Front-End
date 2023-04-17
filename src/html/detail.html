@@ -45,14 +45,16 @@
                     <img src="/svg/disliked.svg" v-if="isDislike" width="20px" height="20px">
                     <img src="/svg/dislike.svg" v-else width="20px" height="20px">
                 </el-button>
-                <el-button type="primary" icon="el-icon-download" @click="download()">下载文档</el-button>
+                <a v-bind:href="fileURL" underline="false" style="margin-left:15px" v-bind:download="fileName">
+                    <el-button type="primary" icon="el-icon-download">下载文档</el-button></a>
+
             </div>
         </div>
 
         </div>
         <div id="pdf">
-            <iframe :src="'/pdfjs/web/viewer.html?file='+filePath+'&page='+pagenumber" width="100%"
-                height="90%"></iframe>
+            <iframe :src="'/pdfjs/web/viewer.html?file='+'http://localhost:8080/'+filePath+'&page='+pagenumber"
+                width="100%" height="90%"></iframe>
         </div>
         <login-index v-bind:login-stas="loginstatus"></login-index>
     </main>
