@@ -2,7 +2,7 @@ body{
     margin: 0;
     border: 0;
 }
-body,html{
+body,html,#app{
     height: 100%;
 }
 
@@ -101,7 +101,8 @@ main{
 #search{
     position: relative;
     text-align: center;
-    top: 15%;
+    /* top: 5%; */
+    padding-bottom: 5%;
 }
 
 /* 搜索框 */
@@ -115,7 +116,14 @@ main{
 
 #title-background{
     background: url(/src/img/backg_in.png) no-repeat;
-    width: 100% 30%;
+    width: 100%;
+    background-size: 100% 100%;
+}
+
+#title-background-m{
+    background: url(/src/img/backg_in_m.jpg) no-repeat;
+    width: 100%;
+    height: 100%;
     background-size: 100% 100%;
 }
 
@@ -129,7 +137,7 @@ main{
 #title-m{
     margin: 0px;
     padding: 5%;
-    padding-top: 20%;
+    padding-top: 70%;
     text-align: center;
     font-size: 30px;
 }

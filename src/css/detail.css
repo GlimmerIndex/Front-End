@@ -90,7 +90,7 @@ body{
     border: 0;
 }
 
-body,html{
+body,html,#app{
     height: 100%;
 }
 
