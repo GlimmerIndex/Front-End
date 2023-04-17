@@ -259,9 +259,10 @@ var Main = {
 
       //获取url
       var c_url = window.location.href;
-      // console.log(c_url);
+      //  console.log(c_url);
       //获取参数
-      if (c_url.indexOf("&") && c_url.indexOf("=")) {
+      // console.log(c_url.indexOf('&') );
+      if (c_url.indexOf('&')>=0 && c_url.indexOf('=')>=0) {
         var c_urlArray = {}
         var c_val = c_url.split('?')[1];
         var c_valArray = c_val.split('&');
@@ -270,11 +271,11 @@ var Main = {
           let c_value = c_valArray[i].split('=')[1];
           c_urlArray[c_key] = c_value;
         }
+        if ((!c_urlArray['index']) || (!c_urlArray['keyword'])) {
+          alert("无相关页面！");
+        }
+        this.keyword = c_urlArray['keyword'];
       }
-      if ((!c_urlArray['index']) || (!c_urlArray['keyword'])) {
-        alert("无相关页面！");
-      }
-      this.keyword = c_urlArray['keyword'];
       // sconsole.log(this.keyword);
       var this_ = this;
       axios({
