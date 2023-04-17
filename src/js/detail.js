@@ -1,4 +1,7 @@
 var host = "http://localhost:8080/"
+var Plat = navigator.userAgent.match( // 判断不同端
+  /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+);
 var Token;
 function IsLogin() {
   // console.log(localStorage.getItem("token"));
@@ -16,7 +19,8 @@ Vue.component('login-index', {
       input_password: "",
       input_mail: "",
       check_password: "",
-      login_board: true
+      login_board: true,
+      plat: Plat,
     }
   },
   methods: {
@@ -36,16 +40,16 @@ Vue.component('login-index', {
   props: ['loginStas'],
   template: `        <div id="login" v-show="!loginStas">
             <!-- 登录面板模板 -->
-            <div id="login-board" v-if="login_board">
+            <div :id="plat?'login-board-m':'login-board'" v-if="login_board">
                 <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
                 <h1>登录</h1>
-                <div class="input-box">
+                <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;&nbsp;&nbsp;&nbsp;账号
                     <el-input id="uname" v-model="input_uname" placeholder="请输入账号" name="uname" autocomplete="on"
                         style="width: 80%;">
                     </el-input>
                 </div>
-                <div class="input-box">
+                <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;&nbsp;&nbsp;&nbsp;密码
                     <el-input id="password" name="password" placeholder="请输入密码" v-model="input_password" show-password
                         style="width: 80%;">
@@ -56,28 +60,28 @@ Vue.component('login-index', {
                 <!-- sign-in函数是显示注册面板用的 -->
             </div>
             <!-- 注册面板模板 -->
-            <div id="signin-board" v-else>
+            <div :id="plat?'signin-board-m':'signin-board'" v-else>
                 <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
                 <h1>注册</h1>
-                <div class="input-box">
+                <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;&nbsp;&nbsp;&nbsp;账号
                     <el-input id="new_uname" type="text" v-model="input_uname" placeholder="请输入账号" name="uname"
                         style="width: 80%;">
                     </el-input>
                 </div>
-                <div class="input-box">
+                <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;&nbsp;&nbsp;&nbsp;邮箱
                     <el-input id="email" v-model="input_mail" placeholder="请输入邮箱" name="email" type="email"
                         style="width: 80%;">
                     </el-input>
                 </div>
-                <div class="input-box">
+                <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;&nbsp;&nbsp;&nbsp;密码
                     <el-input id="password" name="password" placeholder="请输入密码" v-model="input_password" show-password
                         style="width: 80%;">
                     </el-input>
                 </div>
-                <div class="input-box">
+                <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;确认密码
                     <el-input id="password_again" name="password_again" placeholder="请再次输入密码" v-model="check_password"
                         show-password style="width: 74%;">
@@ -96,21 +100,6 @@ Vue.component('login-index', {
     console.log(this.loginStas);
   }
 })
-
-var Main = {
-  data() {
-    return {
-      input: "",
-    };
-  },
-  methods: {
-    searcH() {
-      window.location.href = "/src/html/search.html?keyword=" + this.input;
-    },
-  }
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#search");
 
 
 // 退出登录
@@ -131,7 +120,8 @@ Vue.component('header-index', {
       activeIndex2: "1",
       type: 1,
       uname: 'null',
-      Token: 'null'
+      Token: 'null',
+      plat: Plat,
     };
   },
   props: ['loginStas'],
@@ -180,7 +170,7 @@ Vue.component('header-index', {
                     </el-menu-item>
                     <el-menu-item index="0" id="hello-tag" v-if="loginStas">
                         <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2"
-                            v-if="type==0">管理员</span><span id="account-name"> {{ uname }} 您好！</span>
+                            v-if="type==0">管理员</span><span id="account-name" v-if="!plat"> {{ uname }} 您好！</span>
                         <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
                     </el-menu-item>
                     <!-- 用户中心标签 -->
@@ -250,9 +240,13 @@ var Main = {
       tableData: {},
       loginstatus: 0,
       token: '',
+<<<<<<< HEAD
       fileID: '',
       fileName: '',
       fileURL: ''
+=======
+      plat: Plat,
+>>>>>>> 5188567abb0ea46d74fa8a0c1361319c660b84c9
     };
   },
   mounted() {
@@ -272,11 +266,11 @@ var Main = {
 
       //获取url
       var c_url = window.location.href;
-      console.log("get_info");
-      //console.log(c_url);
+      //  console.log(c_url);
       //获取参数
-      var c_urlArray = {}
-      if (c_url.indexOf("&") && c_url.indexOf("=")) {
+      // console.log(c_url.indexOf('&') );
+      if (c_url.indexOf('&') >= 0 && c_url.indexOf('=') >= 0) {
+        var c_urlArray = {}
         var c_val = c_url.split('?')[1];
         var c_valArray = c_val.split('&');
         for (let i = 0; i < c_valArray.length; i++) {
@@ -284,11 +278,11 @@ var Main = {
           let c_value = c_valArray[i].split('=')[1];
           c_urlArray[c_key] = c_value;
         }
+        if ((!c_urlArray['index']) || (!c_urlArray['keyword'])) {
+          alert("无相关页面！");
+        }
+        this.keyword = c_urlArray['keyword'];
       }
-      if ((!c_urlArray['index']) || (!c_urlArray['keyword'])) {
-        alert("无相关页面！");
-      }
-      this.keyword = c_urlArray['keyword'];
       // sconsole.log(this.keyword);
       var this_ = this;
       // console.log(host + "index/" + this.keyword + "/1");
@@ -450,6 +444,5 @@ var Main = {
     },
   },
 };
-
 var Ctor = Vue.extend(Main);
-new Ctor().$mount("main");
+new Ctor().$mount("#app");

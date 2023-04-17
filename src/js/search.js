@@ -1,5 +1,8 @@
 
 var host = "http://localhost:8080/"
+var Plat = navigator.userAgent.match( // 判断不同端
+  /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+);
 var Main = {
   data() {
     return {
@@ -8,6 +11,7 @@ var Main = {
       input_password: "",
       input_mail: "",
       check_password: "",
+      plat: Plat,
     }
   },
   methods: {
@@ -33,6 +37,7 @@ Vue.component('search-index', {
   data() {
     return {
       input: "",
+      plat: Plat,
     };
   },
   methods: {
@@ -40,7 +45,7 @@ Vue.component('search-index', {
       window.location.href = "./src/html/search.html?keyword=" + this.input;
     },
   },
-  template: `             <div id="search">               <el-input  v-model="input" placeholder="请输入搜索内容">
+  template: `             <div :id="plat?'search-m':'search'">               <el-input  v-model="input" placeholder="请输入搜索内容">
                 </el-input>
                 <el-button type="primary" icon="el-icon-search" @click="searcH()">搜索</el-button></div>`
 })
@@ -64,7 +69,8 @@ Vue.component('header-index', {
       activeIndex2: "1",
       type: 1,
       uname: 'null',
-      Token: 'null'
+      Token: 'null',
+      plat: Plat,
     };
   },
   props: ['loginStas'],
@@ -113,7 +119,7 @@ Vue.component('header-index', {
                     </el-menu-item>
                     <el-menu-item index="0" id="hello-tag" v-if="loginStas">
                         <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2"
-                            v-if="type==0">管理员</span><span id="account-name"> {{ uname }} 您好！</span>
+                            v-if="type==0">管理员</span><span id="account-name" v-if="!plat"> {{ uname }} 您好！</span>
                         <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
                     </el-menu-item>
                     <!-- 用户中心标签 -->
@@ -170,19 +176,6 @@ function Break() {
   }
 }
 
-var Main = {
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-  },
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#keyword");
-
 var main = new Vue({
   el: "#app",
   data() {
@@ -192,7 +185,8 @@ var main = new Vue({
       pagesize: 10,
       tableData: new Array(),
       // 利用vue改变tabledata的值，当条数大于20时进行分页，并且在题名添加链接跳转
-      loginstatus: false
+      loginstatus: false,
+      plat: Plat,
     };
   },
   methods: {

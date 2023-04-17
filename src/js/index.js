@@ -113,7 +113,7 @@ Vue.component('search-index', {
     },
   },
   template: `        <div id="search">
-            <el-input :size="medium" v-model="input" placeholder="请输入搜索内容" style="margin: 100px auto;">
+            <el-input :size="medium" v-model="input" placeholder="请输入搜索内容">
             </el-input>
             <el-button type="primary" icon="el-icon-search" @click="searcH()"
                 style=" position: relative;">搜索</el-button>

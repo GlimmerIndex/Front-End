@@ -1,37 +1,128 @@
-#upload {
-    width: 100px;
-    height: 40px;
-    position: absolute;
-    top: 9%;
-    left: 48%;
+main{
+    /* width: 90%; */
+    height: 100%;
+    padding-top: 8%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    display: block;
 }
+body{
+    background: url(../img/backg_ma.jpg) no-repeat;
+    background-size: 100% 40%;
+    margin: 0;
+    border: 0;
+}
+body,html{
+    height: 100%;
+}
+
+#upload {
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    top: 20%;
+    left: -5%;
+    text-align: center;
+}
+
+#upload-m{
+    width: 100%;
+    position: relative;
+    top: 30%;
+    text-align: center;
+}
+
+#header{
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}
+
+/* 下拉框 */
+.el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+}
+
+/* 箭头图标大小 */
+.el-icon-arrow-down {
+    font-size: 6px !important;
+}
+
+/* 用户中心功能按钮 */
+#input-button{
+    border: none;
+    background-color: #ffffff00;
+}
+/* 顶部导航栏首页标签链接 */
+#index-target{
+    color: #409EFF;
+    text-decoration: none;
+}
+
+/* 顶部导航栏首页标签 */
+#index-tag{
+    position: relative; 
+    left:25px;
+    padding: 0 10px; 
+}
+
+#hello-tag{
+    color: #000000 !important;
+    border-bottom-color: #ffffff00 !important;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    text-align: center;
+}
+
+#account-type-1{
+    display: inline-block;
+    min-width: 10px;
+    padding: 0.3em 0.3em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #4d97d2;
+    border-radius: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+#account-type-2{
+    display: inline-block;
+    min-width: 10px;
+    padding: 0.3em 0.3em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #8e44ad;
+    border-radius: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+#account-number{
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
 
 #files {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     width: 70%;
-    top: 10%;
     background-color: #fff;
-    margin: 0 auto;
-    position: relative;
-    left: 10%;
+    margin-left: 25%;
+    margin-top: 5%;
 }
 
-/* #app{
-    width: 300px;
-    position:absolute;
-    left: 5%;
-    top: 30%;
-} */
-
-body {
-
-    background: url(../img/backg_ma.jpg) no-repeat;
-    background-size: 100% 40%;
-    /* background-attachment:fixed; */
-    margin: 0;
-    border: 0;
-    /* padding-bottom: 5%; */
-
+#files-m {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    width: 100%;
+    background-color: #fff;
+    margin: 20% auto;
 }
 
 #login {

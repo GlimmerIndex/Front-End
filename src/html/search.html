@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>检索</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="/src/css/index.css">
+    <!-- <link rel="stylesheet" href="/src/css/index.css"> -->
     <link rel="stylesheet" href="/src/css/search.css">
     <script src="//unpkg.com/vue@2/dist/vue.js"></script>
     <script src="//unpkg.com/element-ui@2.15.13/lib/index.js"></script>
@@ -23,59 +23,62 @@
         <div id="header">
             <header-index v-bind:login-stas="loginstatus"></header-index>
         </div>
-        <search-index></search-index>
-
-        <template>
-            <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)" style="width: 100%">
-                <el-table-column type="expand">
-                    <template slot-scope="props">
-                        <el-form label-position="left" inline class="demo-table-expand">
-
-
-                            <el-form-item label="段落:" v-for="item in props.row.data">
-                                <p v-html="item.content">{{ item.content }}</p>
-                            </el-form-item>
-
-                        </el-form>
-                    </template>
-                </el-table-column>
-                <el-table-column label="文章名" prop="fileName">
-                </el-table-column>
-
-
-
-                <el-table-column fixed="right" label="操作" width="200">
-                    <template slot-scope="scope">
-                        <el-button @click="detail(scope.row)" type="text" size="small">查看详情</el-button>
-                        <el-button @click="downLoad()" type="text" size="small">下载</el-button>
-                        <el-button @click="like(scope.row.pdfId)" type="text" size="small">赞</el-button>
-                        <el-button @click="dislike(scope.row.pdfId)" type="text" size="small">踩</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-
-            <div>
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                    :current-page="currentPage" :page-sizes="[10, 30, 90, 120]" :page-size="pagesize"
-                    layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
-                </el-pagination>
-            </div>
-
-        </template>
-        <!-- 脚本：利用vue添加各文献的属性 -->
+        <div :id="plat?'search-background-m':'search-background'">
+            <search-index></search-index>
+        </div>
+        <div :id="plat?'article-m':'article'">
+            <template>
+                <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)" style="width: 100%">
+                    <el-table-column type="expand">
+                        <template slot-scope="props">
+                            <el-form label-position="left" inline class="demo-table-expand">
+    
+    
+                                <el-form-item label="段落:" v-for="item in props.row.data">
+                                    <p v-html="item.content">{{ item.content }}</p>
+                                </el-form-item>
+    
+                            </el-form>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="文章名" prop="fileName">
+                    </el-table-column>
+    
+    
+    
+                    <el-table-column fixed="right" label="操作" width="200">
+                        <template slot-scope="scope">
+                            <el-button @click="detail(scope.row)" type="text" size="small">查看详情</el-button>
+                            <el-button @click="downLoad()" type="text" size="small">下载</el-button>
+                            <el-button @click="like(scope.row.pdfId)" type="text" size="small">赞</el-button>
+                            <el-button @click="dislike(scope.row.pdfId)" type="text" size="small">踩</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+    
+                    <div>
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                            :current-page="currentPage" :page-sizes="[10, 30, 90, 120]" :page-size="pagesize"
+                            layout="sizes, prev, pager, next, jumper" :total="tableData.length">
+                        </el-pagination>
+                    </div>
+    
+            </template>
+            <!-- 脚本：利用vue添加各文献的属性 -->
+        </div>
     </div>
-    <div id="login" v-if="charge()">
+    <div id="login" v-show="charge()">
         <!-- 登录面板模板 -->
-        <div id="login-board" v-if="isLogin">
+        <div :id="plat?'login-board-m':'login-board'" v-if="isLogin">
             <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
             <h1>登录</h1>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;账号
                 <el-input id="uname" v-model="input_uname" placeholder="请输入账号" name="uname" autocomplete="on"
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;密码
                 <el-input id="password" name="password" placeholder="请输入密码" v-model="input_password" show-password
                     style="width: 80%;">
@@ -86,28 +89,28 @@
             <!-- sign-in函数是显示注册面板用的 -->
         </div>
         <!-- 注册面板模板 -->
-        <div id="signin-board" v-else>
+        <div :id="plat?'signin-board-m':'signin-board'" v-else>
             <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
             <h1>注册</h1>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;账号
                 <el-input id="new_uname" type="text" v-model="input_uname" placeholder="请输入账号" name="uname"
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;邮箱
                 <el-input id="email" v-model="input_mail" placeholder="请输入邮箱" name="email" type="email"
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;密码
                 <el-input id="password" name="password" placeholder="请输入密码" v-model="input_password" show-password
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;确认密码
                 <el-input id="password_again" name="password_again" placeholder="请再次输入密码" v-model="check_password"
                     show-password style="width: 74%;">

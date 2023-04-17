@@ -1,29 +1,154 @@
+#header{
+    width: 100%;
+    left: 0%;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}
+
+/* 顶部导航栏 */
+#header{
+    width: 100%;
+    left: 0%;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
+
+/* 下拉框 */
+.el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+}
+
+/* 箭头图标大小 */
+.el-icon-arrow-down {
+    font-size: 6px !important;
+}
+
+/* 用户中心功能按钮 */
+#input-button{
+    border: none;
+    background-color: #ffffff00;
+}
+/* 顶部导航栏首页标签链接 */
+#index-target{
+    color: #409EFF;
+    text-decoration: none;
+}
+
+/* 顶部导航栏首页标签 */
+#index-tag{
+    position: relative; 
+    left:25px;
+    padding: 0 10px; 
+}
+
+#hello-tag{
+    color: #000000 !important;
+    border-bottom-color: #ffffff00 !important;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    text-align: center;
+}
+
+#account-type-1{
+    display: inline-block;
+    min-width: 10px;
+    padding: 0.3em 0.3em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #4d97d2;
+    border-radius: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+#account-type-2{
+    display: inline-block;
+    min-width: 10px;
+    padding: 0.3em 0.3em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #8e44ad;
+    border-radius: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+#account-number{
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+
 body{
     margin: 0;
     border: 0;
 }
-main{
-    height: auto;
+body,html,#app{
+    height: 100%;
+    background-color: #fff;
     padding-top: 0;
     padding-bottom: 5%;
 }
 
-#search{
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    /* bottom: 30px; */
-    top: 0;
+#search-background{
     background: url(../img/backg_se.png) no-repeat;
     background-size: 100% 100%;
+    height: 30%;
+}
+
+#search-background-m{
+    background: url(../img/backg_se.png) no-repeat;
+    background-size: 100% 100%;
+    height: 10%;
+}
+
+#search{
+    width: 80%;
+    margin: auto;
+    text-align: center;
     position: relative;
+    top: 50%;
 } 
+
+#search-m{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    top: 20%;
+} 
+
+/* 搜索框 */
+.el-input{
+    width: 70%;
+    border-color: #4e6ef2 !important; 
+}
+.el-input__inner{
+    border-width: 2px;
+}
+
 
 #article{
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    width: 70%;
-    top: 5px;
+    width: 80%;
+    top: 5%;
+    background-color: #fff;
+    margin: auto;
+    position: relative;
+    /* left: 12%; */
+}
+
+#article-m{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    width: 100%;
+    top: 5%;
     background-color: #fff;
     margin: auto;
     position: relative;

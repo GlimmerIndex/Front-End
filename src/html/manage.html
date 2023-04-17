@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文件管理</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="/src/css/index.css">
+    <!-- <link rel="stylesheet" href="/src/css/index.css"> -->
     <link rel="stylesheet" href="/src/css/manage.css">
     <script src="//unpkg.com/vue@2/dist/vue.js"></script>
     <script src="//unpkg.com/element-ui@2.15.13/lib/index.js"></script>
@@ -27,7 +27,7 @@
             <header-index v-bind:login-stas="loginstatus"></header-index>
         </div>
         <file-manage></file-manage>
-        <el-upload class="upload-demo" ref="upload" action="http://localhost:8080/uploads/pdf/" multiple
+        <el-upload :id="plat?'upload-m':'upload'" ref="upload" action="http://localhost:8080/uploads/pdf/" multiple
             :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" :auto-upload="false"
             :headers="{ token: this.token }">
             <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
@@ -37,16 +37,16 @@
     </div>
     <div id="login" v-show="charge()">
         <!-- 登录面板模板 -->
-        <div id="login-board" v-if="isLogin">
+        <div :id="plat?'login-board-m':'login-board'" v-if="isLogin">
             <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
             <h1>登录</h1>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;账号
                 <el-input id="uname" v-model="input_uname" placeholder="请输入账号" name="uname" autocomplete="on"
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;密码
                 <el-input id="password" name="password" placeholder="请输入密码" v-model="input_password" show-password
                     style="width: 80%;">
@@ -57,28 +57,28 @@
             <!-- sign-in函数是显示注册面板用的 -->
         </div>
         <!-- 注册面板模板 -->
-        <div id="signin-board" v-else>
+        <div :id="plat?'signin-board-m':'signin-board'" v-else>
             <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
             <h1>注册</h1>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;账号
                 <el-input id="new_uname" type="text" v-model="input_uname" placeholder="请输入账号" name="uname"
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;邮箱
                 <el-input id="email" v-model="input_mail" placeholder="请输入邮箱" name="email" type="email"
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;&nbsp;&nbsp;&nbsp;密码
                 <el-input id="password" name="password" placeholder="请输入密码" v-model="input_password" show-password
                     style="width: 80%;">
                 </el-input>
             </div>
-            <div class="input-box">
+            <div :class="plat?'input-box-m':'input-box'">
                 &nbsp;确认密码
                 <el-input id="password_again" name="password_again" placeholder="请再次输入密码" v-model="check_password"
                     show-password style="width: 74%;">

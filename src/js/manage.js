@@ -1,4 +1,7 @@
 var host = "http://localhost:8080/"
+var Plat = navigator.userAgent.match( // 判断不同端
+  /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+);
 function IsLogin() {
   // console.log(localStorage.getItem("token"));
   // console.log(localStorage.getItem("token") !== null);
@@ -16,6 +19,7 @@ var Main = {
       input_password: "",
       input_mail: "",
       check_password: "",
+      plat: Plat,
     }
   },
   methods: {
@@ -72,7 +76,8 @@ Vue.component('header-index', {
       activeIndex2: "1",
       type: 1,
       uname: 'null',
-      Token: 'null'
+      Token: 'null',
+      plat: Plat,
     };
   },
   props: ['loginStas'],
@@ -121,7 +126,7 @@ Vue.component('header-index', {
                     </el-menu-item>
                     <el-menu-item index="0" id="hello-tag" v-if="loginStas">
                         <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2"
-                            v-if="type==0">管理员</span><span id="account-name"> {{ uname }} 您好！</span>
+                            v-if="type==0">管理员</span><span id="account-name" v-if="!plat"> {{ uname }} </span>您好！
                         <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
                     </el-menu-item>
                     <!-- 用户中心标签 -->
@@ -161,6 +166,7 @@ Vue.component("file-manage", {
       currentPage: 1,
       pagesize: 10,
       tableData: new Array(),
+      plat: Plat,
     };
   },
   mounted() {
@@ -219,7 +225,7 @@ Vue.component("file-manage", {
       console.log(this.currentPage); //点击第几页
     },
   },
-  template: `    <div id="files">
+  template: `    <div :id="plat?'files-m':'files'">
         <template>
             <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)" style="width: 100%">
                 <el-table-column prop="fileName" label="文件名" width="200 ">
@@ -249,7 +255,7 @@ Vue.component("file-manage", {
             <div>
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                     :current-page="currentPage" :page-sizes="[10, 30, 90, 120]" :page-size="pagesize"
-                    layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+                    layout="sizes, prev, pager, next, jumper" :total="tableData.length">
                 </el-pagination>
             </div>
         </template>
@@ -269,6 +275,7 @@ var Main = {
       ],
       loginstatus: 0,
       token: "",
+      plat: Plat,
     };
   },
   methods: {

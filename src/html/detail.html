@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>详情页</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="/src/css/index.css">
+    <!-- <link rel="stylesheet" href="/src/css/index.css"> -->
     <link rel="stylesheet" href="/src/css/detail.css">
     <script src="https://unpkg.com/vue@2.7.0/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -19,22 +19,39 @@
 
 <body>
 
-    <main style="padding-top: 0; padding-bottom: 1%;">
+    <div id="app">
         <!-- 顶部导航栏 -->
         <div id="header">
             <header-index v-bind:login-stas="loginstatus">
             </header-index>
         </div>
-        <div id="about">
-            <div id="pdftitle">{{ tableData.fileName }}</div>
-            <div id="information">
-                上传时间：{{ time }}&nbsp;&nbsp;&nbsp;文档大小：{{ tableData.fileSize }}Kb<br>
-                点赞量：{{ tableData.likeNumber }}&nbsp;&nbsp;&nbsp;点踩量：{{ tableData.dislikeNumber }}
+        <div :id="plat?'main-m':'main'">
+            <div id="about">
+                <div id="pdftitle">{{ tableData.fileName }}</div>
+                <div id="information">
+                    上传时间：{{ time }}&nbsp;&nbsp;&nbsp;文档大小：{{ tableData.fileSize }}Kb<br>
+                    点赞量：{{ tableData.likeNumber }}&nbsp;&nbsp;&nbsp;点踩量：{{ tableData.dislikeNumber }}
+                </div>
+                <div id="fragment-block">
+                    <span id="fragment-title">相关段落</span>
+                    <button class="fragment" v-for="item in tableData.data" v-html="item.content"
+                        @click="jump_page(item.pageId)"></button>
+                </div>
+                <div id="interact">
+                    <el-button plain class="est" @click="like(false)">
+                        <img src="/svg/liked.svg" v-if="isLike" width="20px" height="20px">
+                        <img src="/svg/like.svg" v-else width="20px" height="20px">
+                    </el-button>
+                    <el-button plain class="est" @click="dislike(false)">
+                        <img src="/svg/disliked.svg" v-if="isDislike" width="20px" height="20px">
+                        <img src="/svg/dislike.svg" v-else width="20px" height="20px">
+                    </el-button>
+                    <el-button type="primary" icon="el-icon-download" @click="download()">下载文档</el-button>
+                </div>
             </div>
-            <div id="fragment-block">
-                <span id="fragment-title">相关段落</span>
-                <button class="fragment" v-for="item in tableData.data" v-html="item.content"
-                    @click="jump_page(item.pageId)"></button>
+            <div :id="plat?'pdf-m':'pdf'">
+                <iframe :src="'/pdfjs/web/viewer.html?file='+filePath+'&page='+pagenumber" width="100%"
+                    height="95%"></iframe>
             </div>
             <div id="interact">
                 <el-button plain class="est" @click="like(false)">
@@ -51,13 +68,13 @@
             </div>
         </div>
 
-        </div>
-        <div id="pdf">
-            <iframe :src="'/pdfjs/web/viewer.html?file='+'http://localhost:8080/'+filePath+'&page='+pagenumber"
-                width="100%" height="90%"></iframe>
-        </div>
-        <login-index v-bind:login-stas="loginstatus"></login-index>
-    </main>
+    </div>
+    <div id="pdf">
+        <iframe :src="'/pdfjs/web/viewer.html?file='+'http://localhost:8080/'+filePath+'&page='+pagenumber" width="100%"
+            height="90%"></iframe>
+    </div>
+    <login-index v-bind:login-stas="loginstatus"></login-index>
+    </div>
 </body>
 
 </html>
