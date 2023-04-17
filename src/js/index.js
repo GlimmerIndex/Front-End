@@ -36,7 +36,7 @@ Vue.component('login-index', {
   template: `        <div id="login" v-show="!loginStas">
             <!-- 登录面板模板 -->
             <div id="login-board" v-if="login_board">
-                <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
+                 <!--  <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun"> -->
                 <h1>登录</h1>
                 <div class="input-box">
                     &nbsp;&nbsp;&nbsp;&nbsp;账号
@@ -56,7 +56,7 @@ Vue.component('login-index', {
             </div>
             <!-- 注册面板模板 -->
             <div id="signin-board" v-else>
-                <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
+                <!-- <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun"> -->
                 <h1>注册</h1>
                 <div class="input-box">
                     &nbsp;&nbsp;&nbsp;&nbsp;账号
@@ -107,9 +107,12 @@ Vue.component('search-index', {
       window.location.href = "./src/html/search.html?keyword=" + this.input;
     },
   },
-  template: `             <div id="search">               <el-input  v-model="input" placeholder="请输入搜索内容">
-                </el-input>
-                <el-button type="primary" icon="el-icon-search" @click="searcH()">搜索</el-button></div>`
+  template: `        <div id="search">
+            <el-input :size="medium" v-model="input" placeholder="请输入搜索内容" style="margin: 100px auto;">
+            </el-input>
+            <el-button type="primary" icon="el-icon-search" @click="searcH()"
+                style=" position: relative;">搜索</el-button>
+        </div>`
 })
 
 // 退出登录
@@ -145,20 +148,21 @@ Vue.component('header-index', {
       this.uname = localStorage.getItem("uname")
       this.type = 2;
       this.Token = localStorage.getItem("token");
-      console.log(this);
+      // console.log(this);
+      var this_ = this;
       axios({
         method: "get",
         url: host + "user/info/" + localStorage.getItem("uname"),
         headers: { " token": this.Token },
       }).then(function (response) {
-        // console.log(response);
+        console.log(response);
         // console.log("Type: " + response.data.data.userType);
-        if (response.code == 200) {
-          //console.log("Type: " + response.data.userType);
-          this.type = response.data.data.userType;
+        if (response.data.code == 200) {
+          // console.log("Type: " + response.data.data.userType);
+          this_.type = response.data.data.userType;
         } else {
-          this.uname = "null"
-          this.type = 2;
+          this_.uname = "null"
+          this_.type = 2;
         }
       });
     }
@@ -190,7 +194,7 @@ Vue.component('header-index', {
                             </span>
                             <!-- 下拉框，分别对应文档管理，账号登出等功能 -->
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item v-if="type==2">
+                                <el-dropdown-item v-if="type==0">
                                     <i class="el-icon-document-add" style="color: #606266;"></i>
                                     <input type="button" class="idw"
                                         onclick="window.location.href = '/src/html/manage.html'" value="文档管理"

@@ -18,10 +18,18 @@ var Main = {
     },
   }
 }
+function IsLogin() {
+  console.log(localStorage.getItem("token"));
+  console.log(localStorage.getItem("token") !== null);
+  if (localStorage.getItem("token") == null) {
+    return false;
+  }
+  return true;
+}
 var Ctor = Vue.extend(Main);
 new Ctor().$mount("#login");
 
-var Main = {
+Vue.component('search-index', {
   data() {
     return {
       input: "",
@@ -29,12 +37,13 @@ var Main = {
   },
   methods: {
     searcH() {
-      window.location.href = "/src/html/search.html?keyword=" + this.input;
+      window.location.href = "./src/html/search.html?keyword=" + this.input;
     },
-  }
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#search");
+  },
+  template: `             <div id="search">               <el-input  v-model="input" placeholder="请输入搜索内容">
+                </el-input>
+                <el-button type="primary" icon="el-icon-search" @click="searcH()">搜索</el-button></div>`
+})
 
 
 // 退出登录
@@ -48,15 +57,17 @@ function ch_user() {
   }
 }
 
-var Main = {
+Vue.component('header-index', {
   data() {
     return {
       activeIndex: "1",
       activeIndex2: "1",
       type: 1,
       uname: 'null',
+      Token: 'null'
     };
   },
+  props: ['loginStas'],
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -66,23 +77,76 @@ var Main = {
     },
     get_hello() {
       this.uname = localStorage.getItem("uname")
+      this.type = 2;
+      this.Token = localStorage.getItem("token");
+      // console.log(this);
+      var this_ = this;
       axios({
         method: "get",
         url: host + "user/info/" + localStorage.getItem("uname"),
-        headers: { " taken": Token },
+        headers: { " token": this.Token },
       }).then(function (response) {
-        if (response.code == 200) {
-          this.type = response.data.userType;
+        console.log(response);
+        // console.log("Type: " + response.data.data.userType);
+        if (response.data.code == 200) {
+          // console.log("Type: " + response.data.data.userType);
+          this_.type = response.data.data.userType;
         } else {
-          this.uname = "null"
-          this.type = 2;
+          this_.uname = "null"
+          this_.type = 2;
         }
       });
     }
   },
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#header");
+  mounted: function () {
+    console.log("header login " + this.loginStas);
+    // console.log("header created");
+    this.get_hello();
+  },
+  template: `                <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+                    text-color="#fff" active-text-color="#ffd04b" style="position: relative;">
+                    <!-- 首页标签 -->
+                    <el-menu-item index="1" id="index-tag">
+                        <a href="/index.html" id="index-target">
+                            <i class="el-icon-house" style="color: #409EFF;"></i><span>首页</span>
+                        </a>
+                    </el-menu-item>
+                    <el-menu-item index="0" id="hello-tag" v-if="loginStas">
+                        <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2"
+                            v-if="type==0">管理员</span><span id="account-name"> {{ uname }} 您好！</span>
+                        <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
+                    </el-menu-item>
+                    <!-- 用户中心标签 -->
+                    <el-menu-item index="1" style="position: absolute; right: 25px; padding:0px 0px 0px 10px;">
+                        <el-dropdown>
+                            <span class="el-dropdown-link">
+                                <i class="el-icon-user-solid" style="color: #409EFF;"></i>用户中心<i
+                                    class="el-icon-arrow-down"></i>
+                            </span>
+                            <!-- 下拉框，分别对应文档管理，账号登出等功能 -->
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item v-if="type==2">
+                                    <i class="el-icon-document-add" style="color: #606266;"></i>
+                                    <input type="button" class="idw"
+                                        onclick="window.location.href = '/src/html/manage.html'" value="文档管理"
+                                        id="input-button" />
+                                </el-dropdown-item>
+                                <el-dropdown-item>
+                                    <i><img src="/svg/sign-out.svg" width="14px" height="14px"
+                                            style="position: relative; top: 1px;"></i>
+                                    <input type="button" class="ch_user" onclick="ch_user()" value="账号登出"
+                                        id="input-button" />
+                                </el-dropdown-item>
+                                <el-dropdown-item>
+                                    <i class="el-icon-error" style="color: #606266;"></i>
+                                    <input type="button" class="br_user" onclick="Break()" value="账号注销"
+                                        id="input-button" />
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </el-menu-item>
+                </el-menu>`
+})
 
 // 账户注销
 function Break() {
@@ -119,7 +183,8 @@ var Main = {
 var Ctor = Vue.extend(Main);
 new Ctor().$mount("#keyword");
 
-var Main = {
+var main = new Vue({
+  el: "#app",
   data() {
     return {
       input: "",
@@ -127,10 +192,13 @@ var Main = {
       pagesize: 10,
       tableData: new Array(),
       // 利用vue改变tabledata的值，当条数大于20时进行分页，并且在题名添加链接跳转
+      loginstatus: false
     };
   },
   methods: {
     detail(a) {
+      console.log(a.fileID);
+      console.log(this.input);
       window.location.href = "/src/html/detail.html?keyword=" + this.input + "&index=" + this.tableData.indexOf(a);
       // alert("scscsd");
 
@@ -244,9 +312,22 @@ var Main = {
   },
   mounted() {
     this.SearcH();
-    // console.log("Main");
-    // console.log(this.tableData);
+    console.log("App created");
+    console.log("前端版本");
+    this.loginstatus = IsLogin();
+    // console.log(this.loginstatus);
+    var c_url = window.location.href;
+    //获取参数
+    if (c_url.indexOf("?") && c_url.indexOf("=")) {
+      var c_urlArray = {};
+      var c_val = c_url.split("?")[1];
+      var c_valArray = c_val.split("&");
+      for (let i = 0; i < c_valArray.length; i++) {
+        let c_key = c_valArray[i].split("=")[0];
+        let c_value = c_valArray[i].split("=")[1];
+        c_urlArray[c_key] = c_value;
+      }
+    }
+    this.input = c_urlArray["keyword"];
   }
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount("#main");
+});

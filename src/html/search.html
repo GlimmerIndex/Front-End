@@ -13,104 +13,57 @@
     <script src="//unpkg.com/element-ui@2.15.13/lib/index.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/src/js/search.js" defer></script>
-    <script src="/src/js/login.js" defer></script>
+
 </head>
 
 <body>
     <!-- 顶部导航栏 -->
-    <div id="header">
-        <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-            text-color="#fff" active-text-color="#ffd04b" style="position: relative;">
-            <!-- 首页标签 -->
-            <el-menu-item index="1" id="index-tag">
-                <a href="/index.html" id="index-target">
-                    <i class="el-icon-house" style="color: #409EFF;"></i><span>首页</span>
-                </a>
-            </el-menu-item>
-            <el-menu-item index="0" id="hello-tag" onload="get_hello()">
-                <span id="account-type-1" v-if="type==1">普通用户</span><span id="account-type-2" v-else>管理员</span><span
-                    id="account-name"> {{ uname }} 您好！</span>
-                <!-- 脚本(get_hello):判断用户权限和昵称，并填入用户权限类型（若用户权限为普通用户样式为account-type-1，若用户权限为管理员样式为account-type-2）和用户昵称（样式为account-name）中 -->
-            </el-menu-item>
-            <!-- 用户中心标签 -->
-            <el-menu-item index="1" style="position: absolute; right: 25px; padding:0px 0px 0px 10px;">
-                <el-dropdown>
-                    <span class="el-dropdown-link">
-                        <i class="el-icon-user-solid" style="color: #409EFF;"></i>用户中心<i class="el-icon-arrow-down"></i>
-                    </span>
-                    <!-- 下拉框，分别对应文档管理，账号登出等功能 -->
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item v-if="type==2">
-                            <i class="el-icon-document-add" style="color: #606266;"></i>
-                            <input type="button" class="idw" onclick="window.location.href = 'manage.html'" value="文档管理"
-                                id="input-button" />
-                        </el-dropdown-item>
-                        <el-dropdown-item>
-                            <i><img src="/svg/sign-out.svg" width="14px" height="14px"
-                                    style="position: relative; top: 1px;"></i>
-                            <input type="button" class="ch_user" onclick="ch_user()" value="账号登出" id="input-button" />
-                        </el-dropdown-item>
-                        <el-dropdown-item>
-                            <i class="el-icon-error" style="color: #606266;"></i>
-                            <input type="button" class="br_user" onclick="Break()" value="账号注销" id="input-button" />
-                        </el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </el-menu-item>
-        </el-menu>
+
+    <div id="app">
+        <div id="header">
+            <header-index v-bind:login-stas="loginstatus"></header-index>
+        </div>
+        <search-index></search-index>
+
+        <template>
+            <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)" style="width: 100%">
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-form label-position="left" inline class="demo-table-expand">
+
+
+                            <el-form-item label="段落:" v-for="item in props.row.data">
+                                <p v-html="item.content">{{ item.content }}</p>
+                            </el-form-item>
+
+                        </el-form>
+                    </template>
+                </el-table-column>
+                <el-table-column label="文章名" prop="fileName">
+                </el-table-column>
+
+
+
+                <el-table-column fixed="right" label="操作" width="200">
+                    <template slot-scope="scope">
+                        <el-button @click="detail(scope.row)" type="text" size="small">查看详情</el-button>
+                        <el-button @click="downLoad()" type="text" size="small">下载</el-button>
+                        <el-button @click="like(scope.row.pdfId)" type="text" size="small">赞</el-button>
+                        <el-button @click="dislike(scope.row.pdfId)" type="text" size="small">踩</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <div>
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage" :page-sizes="[10, 30, 90, 120]" :page-size="pagesize"
+                    layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+                </el-pagination>
+            </div>
+
+        </template>
+        <!-- 脚本：利用vue添加各文献的属性 -->
     </div>
-    <main>
-        <div id="search">
-            <el-input :size="medium" v-model="input" placeholder="请输入搜索内容" style="margin: 100px auto;">
-            </el-input>
-            <el-button type="primary" icon="el-icon-search" @click="searcH()"
-                style=" position: relative;">搜索</el-button>
-        </div>
-
-        <div id="main">
-            <template>
-                <el-table :data="tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
-                    style="width: 100%">
-                    <el-table-column type="expand">
-                        <template slot-scope="props">
-                            <el-form label-position="left" inline class="demo-table-expand">
-
-
-                                <el-form-item label="段落:" v-for="item in props.row.data">
-                                    <p v-html="item.content">{{ item.content }}</p>
-                                </el-form-item>
-
-                            </el-form>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="文章名" prop="fileName">
-                    </el-table-column>
-
-
-
-                    <el-table-column fixed="right" label="操作" width="200">
-                        <template slot-scope="scope">
-                            <el-button @click="detail(scope.row)" type="text" size="small">查看详情</el-button>
-                            <el-button @click="downLoad()" type="text" size="small">下载</el-button>
-                            <el-button @click="like(scope.row.pdfId)" type="text" size="small">赞</el-button>
-                            <el-button @click="dislike(scope.row.pdfId)" type="text" size="small">踩</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-
-                <div>
-                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                        :current-page="currentPage" :page-sizes="[10, 30, 90, 120]" :page-size="pagesize"
-                        layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
-                    </el-pagination>
-                </div>
-
-            </template>
-            <!-- 脚本：利用vue添加各文献的属性 -->
-        </div>
-
-    </main>
     <div id="login" v-if="charge()">
         <!-- 登录面板模板 -->
         <div id="login-board" v-if="isLogin">
@@ -168,6 +121,8 @@
 
         <!-- 脚本（is-login)：判断账户是否登录，若没有登录就把这个元素显示出来，如果登录了就不显示 -->
     </div>
+    <script src="/src/js/search.js" defer></script>
+    <script src="/src/js/login.js" defer></script>
 </body>
 
 </html>
