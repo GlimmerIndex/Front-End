@@ -89,7 +89,6 @@ main{
     z-index: 2;
 }
 
-
 #login-board{
     position: relative;
     width: 40%;
@@ -102,11 +101,35 @@ main{
     box-shadow: 0 4px 4x rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 
+#login-board-m{
+    position: relative;
+    width: 80%;
+    height: auto;
+    left: 10%;
+    top: 20%;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 4x rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}
+
 #signin-board{
     position: relative;
     width: 40%;
     height: auto;
     left: 30%;
+    top:10%;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 4x rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}
+
+#signin-board-m{
+    position: relative;
+    width:80%;
+    height: auto;
+    left: 10%;
     top:10%;
     text-align: center;
     background-color: #fff;
@@ -137,6 +160,22 @@ main{
 }
 
 .input-box input{
+    border: 0px;
+}
+
+.input-box-m{ 
+    width: 80%;
+    margin: 5% auto;
+    text-align: left;
+    /* border-color: #4e6ef2; */
+    border: 1px solid #8a8b8d;
+    border-radius: 8px;
+    position: relative;
+    /* top: 5%; */
+    
+}
+
+.input-box-m input{
     border: 0px;
 }
 
