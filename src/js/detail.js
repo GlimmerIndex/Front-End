@@ -240,13 +240,10 @@ var Main = {
       tableData: {},
       loginstatus: 0,
       token: '',
-<<<<<<< HEAD
       fileID: '',
       fileName: '',
-      fileURL: ''
-=======
+      fileURL: '',
       plat: Plat,
->>>>>>> 5188567abb0ea46d74fa8a0c1361319c660b84c9
     };
   },
   mounted() {
