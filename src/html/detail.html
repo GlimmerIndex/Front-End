@@ -46,25 +46,13 @@
                         <img src="/svg/disliked.svg" v-if="isDislike" width="20px" height="20px">
                         <img src="/svg/dislike.svg" v-else width="20px" height="20px">
                     </el-button>
-                    <el-button type="primary" icon="el-icon-download" @click="download()">下载文档</el-button>
-                </div>
-                <div id="interact">
-                    <el-button plain class="est" @click="like(false)">
-                        <img src="/svg/liked.svg" v-if="isLike" width="20px" height="20px">
-                        <img src="/svg/like.svg" v-else width="20px" height="20px">
-                    </el-button>
-                    <el-button plain class="est" @click="dislike(false)">
-                        <img src="/svg/disliked.svg" v-if="isDislike" width="20px" height="20px">
-                        <img src="/svg/dislike.svg" v-else width="20px" height="20px">
-                    </el-button>
                     <a v-bind:href="fileURL" underline="false" style="margin-left:15px" v-bind:download="fileName">
                         <el-button type="primary" icon="el-icon-download">下载文档</el-button></a>
-    
                 </div>
             </div>
             <div :id="plat?'pdf-m':'pdf'">
-                <iframe :src="'/pdfjs/web/viewer.html?file='+'http://localhost:8080/'+filePath+'&page='+pagenumber" width="100%"
-                    height="95%"></iframe>
+                <iframe :src="'/pdfjs/web/viewer.html?file='+'http://localhost:8080/'+filePath+'&page='+pagenumber"
+                    width="100%" height="95%"></iframe>
             </div>
         </div>
     </div>

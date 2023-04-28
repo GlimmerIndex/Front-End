@@ -41,7 +41,7 @@ Vue.component('login-index', {
   template: `        <div id="login" v-show="!loginStas">
             <!-- 登录面板模板 -->
             <div :id="plat?'login-board-m':'login-board'" v-if="login_board">
-                <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
+                
                 <h1>登录</h1>
                 <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;&nbsp;&nbsp;&nbsp;账号
@@ -61,7 +61,6 @@ Vue.component('login-index', {
             </div>
             <!-- 注册面板模板 -->
             <div :id="plat?'signin-board-m':'signin-board'" v-else>
-                <img src="/src/img/huixun.png" alt="backg_in.png" class="huixun">
                 <h1>注册</h1>
                 <div :class="plat?'input-box-m':'input-box'">
                     &nbsp;&nbsp;&nbsp;&nbsp;账号
